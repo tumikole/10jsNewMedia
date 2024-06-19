@@ -1,3 +1,9 @@
+html{
+  padding: 0;
+  margin: 0;
+  height: fit-content;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -10,4 +16,19 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.homePageTitle{
+  color: goldenrod;
+  margin-top: 3rem !important;
+  margin-bottom: 3rem;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.seeMoreLink{
+  color: goldenrod;
+  text-decoration: none;
+  font-size: 1.5rem;
+  text-align: center;
 }

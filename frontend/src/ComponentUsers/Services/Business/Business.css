@@ -1,0 +1,128 @@
+.business{
+        background-color: #1b2431 !important;
+}
+
+.business .active {
+    border-bottom: 2px solid aqua;
+  }
+
+  .business .navbar,
+  .container-fluid {
+    background-color: transparent;
+  }
+
+  .business .nav-item a {
+    color: white;
+  }
+
+  .business .navbar-brand {
+    color: white;
+  }
+
+  .business #header {
+    background: rgb(0, 0, 0);
+    background: linear-gradient(90deg, rgba(0, 0, 0, 1) 0%, rgba(0, 71, 106, 1) 0%, rgba(0, 33, 255, 1) 100%, rgba(0, 110, 255, 1) 100%);
+    min-height: 65%;
+    color: #0ef;
+    margin-top: 2rem;
+    padding-top:1.5rem;
+    padding-bottom:1.5rem;
+
+  }
+
+  .business h1 span {
+    color: aqua;
+  }
+
+  .business h1 {
+    font-size: 4rem;
+  }
+
+  .business .dark {
+    padding: 20px;
+    border-radius: 10px;
+    border: transparent;
+    background-color: rgb(1, 9, 54);
+    color: white;
+    width: 200px;
+    z-index: 2;
+  }
+
+  .business .aqua {
+    padding: 20px;
+    border-radius: 10px;
+    border: transparent;
+    background-color: rgb(1, 202, 202);
+    color: rgb(1, 9, 54);
+    width: 200px;
+    z-index: 2;
+    margin-left: 1rem;
+  }
+
+  .business #plan{
+    margin-top:1.5rem;
+    
+  }
+  .business .planHeader{
+    margin-left: 5%;
+    width: 95%;
+    height: 100%;
+    color: #0ef;
+    margin-top:1.8rem;
+    margin-bottom:1.8rem;
+  }
+  
+  .business h4 span {
+    background-color: rgb(191, 248, 248);
+    border-bottom-left-radius: 20px;
+  }
+
+  .business h4 {
+    line-height: 3;
+  }
+
+  .business #plan {
+    margin-left: 5%;
+    width: 95%;
+    height: 100%;
+  }
+
+  .business .card {
+    border-radius: 10px;
+    border: transparent;
+    padding: 5% 7%;
+  }
+
+  .business .card-body {
+    margin-left: 2%;
+  }
+
+  .business .card-text {
+    color: gray;
+  }
+
+  .business .btn-linear {
+    text-align: right;
+    margin-right: 1%;
+  }
+
+  .business .card:hover {
+    background-color: rgb(231, 253, 255);
+    cursor: pointer;
+  }
+
+  .business #conclusion {
+    background-image: linear-gradient(to bottom, aliceblue, rgb(216, 223, 230), rgb(216, 223, 230));
+    width: 100%;
+    height: 95%;
+  }
+
+  .business table th {
+    color: rgb(1, 9, 54);
+    line-height: 2;
+  }
+
+  .business table td {
+    line-height: 2;
+    padding-right: 60px;
+  }

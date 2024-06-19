@@ -1,0 +1,32 @@
+.ServiceNav {
+  padding-top: 3rem;
+}
+
+.ServiceNav nav {
+  display: flex;
+  width: 50%;
+  margin: auto;
+}
+
+.ServiceNav .serviceNavHome ul {
+  display: flex;
+}
+
+.ServiceNav .serviceNavHome ul li {
+  display: flex;
+  gap: 1rem;
+  color: #0ef;
+  cursor: pointer;
+}
+
+.ServiceNav .serviceNavList ul {
+  display: flex;
+  gap: 1rem;
+}
+
+.ServiceNav .serviceNavList ul li {
+  display: flex;
+  gap: 1rem;
+  cursor: pointer;
+  color: #0ef;
+}

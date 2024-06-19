@@ -1,0 +1,73 @@
+.blogPagePage {
+  position: relative;
+  background-color: #273142;
+}
+
+.blogNav {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  overflow: visible;
+  z-index: 1;
+}
+
+.blogBody {
+}
+
+.blogPageHeader {
+  padding-top: 8rem;
+  color: #0ef;
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.gradient {
+  background-image: linear-gradient(
+    to bottom,
+    rgba(243, 244, 246, 0.1),
+    rgba(0, 0, 0, 0.8)
+  );
+}
+
+.group:hover .group-hover\:translate-y-0 {
+  transform: translateY(0);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background-color: rgba(31, 41, 55, 0.9);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background-color: #4b5563;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #4b5563;
+}
+
+::selection {
+  background: rgb(107 114 128); /* WebKit/Blink Browsers */
+}
+::-moz-selection {
+  background: rgb(107 114 128); /* Gecko Browsers */
+}
+
+.trendingCardsContainer {
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+}
+
+.blogWrapperContainer {
+  display: grid;
+  grid-template-columns: 65% 35%;
+}

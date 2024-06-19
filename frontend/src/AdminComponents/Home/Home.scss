@@ -1,0 +1,44 @@
+.adminHome {
+  .homeHeader {
+    h1 {
+      text-align: center;
+      color: white;
+      margin-top: 3rem;
+    }
+  }
+  .homeBody {
+    h1 {
+      text-align: center;
+      color: white;
+      margin-top: 2rem;
+    }
+    h2 {
+      text-align: center;
+      color: white;
+      margin-top: 2rem;
+    }
+    h3 {
+      text-align: center;
+      color: white;
+      margin-top: 2rem;
+    }
+    .permissions {
+      display: grid !important;
+      grid-template-columns: 25% 25% 25% 25%;
+      width: 50%;
+      margin: auto;
+      margin-top: 2rem;
+      border-radius: 10px;
+      border: 1px solid white;
+      box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2);
+      transition: 0.3s;
+      padding: 0.5rem !important;
+      p {
+        text-align: center;
+        color: white !important;
+      }
+    }
+  }
+  .homeFooter {
+  }
+}

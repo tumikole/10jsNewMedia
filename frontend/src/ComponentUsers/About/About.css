@@ -1,0 +1,298 @@
+.about_us_container .about_us {
+  width: 100% !important;
+  min-height: 60vh;
+  background: #34495e;
+  color: rgba(255, 255, 255, 0.7);
+  vertical-align: middle;
+  position: relative;
+  padding: 150px 10% 50px 10%;
+}
+
+.about_us_container .about_us > h2 {
+  display: block;
+  color: rgba(255, 255, 255, 1);
+  font-size: 32px;
+  line-height: 31px;
+  letter-spacing: 1px;
+  font-weight: 700;
+  margin: 0 auto 30px;
+}
+
+.about_us_container .about_us > span {
+  display: block;
+  color: rgba(255, 255, 255, 1);
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1.75;
+  margin: 20px auto 10px;
+}
+
+.about_us_container .about_us > p {
+  display: block;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.75;
+  margin: 0 auto 10px;
+}
+
+.about_us_container .about_us > img {
+  display: block;
+  margin-bottom: 20px;
+}
+
+.about_us_container .about_us > .mission {
+  color: rgba(255, 255, 255, 1);
+  display: blcok;
+  width: 60%;
+  box-sizing: border-box;
+  border-radius: 10px;
+  background-color: rgba(92, 188, 224, 0.4);
+  margin-left: 20%;
+  padding: 5px 10px;
+}
+
+.about_us_container .about_us > .mission > span {
+  display: block;
+  margin: 0 auto 10px;
+  font-size: x-large;
+  text-align: center;
+  font-weight: 500;
+  line-height: 1.75;
+}
+.about_us_container .about_us > .mission > p {
+  display: block;
+  color: rgba(255, 255, 255, 1);
+  margin: 0 auto 10px;
+  text-align: center;
+  font-weight: 500;
+  line-height: 1.75;
+}
+
+.about_us_container .company_info {
+  margin-top: 3rem;
+}
+
+.about_us_container .our_team {
+  color: rgba(255, 255, 255, 1);
+  background: #34495e;
+  padding: 3rem;
+
+}
+
+.about_us_container .our_team .card-top {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  width: 60%;
+  margin: auto;
+  border: 10px solid rgba(92, 188, 224, 0.4);
+  padding: 2rem;
+  border-radius: 30px;
+  
+}
+
+.about_us_container .our_team .card-top .card {
+  width: 70%;
+  margin: auto;
+
+}
+.about_us_container .our_team .card-top .card p,h2 {
+text-align: center;
+color: white !important;
+}
+
+.about_us_container .our_team .card-top .card img{
+  height: 230px;
+  width: 230px;
+  margin: auto;
+  border: 10px solid rgba(92, 188, 224, 0.4);
+  /* margin: auto; */
+}
+
+.about_us_container .footer {
+  overflow: hidden;
+  background: #485b6e;
+  color: rgba(255, 255, 255, 1);
+  display: block;
+  width: 100%;
+  position: auto;
+}
+.about_us_container .footer > .address {
+  display: inline-block;
+  position: relative;
+  margin-left: 10%;
+  margin-top: 50px;
+  width: auto;
+  float: left;
+}
+.about_us_container .footer > .address > span {
+  display: block;
+  padding-top: 10px;
+}
+.about_us_container .footer > .phone {
+  display: inline-block;
+  width: auto;
+  position: relative;
+  margin-right: 10%;
+  margin-top: 50px;
+  float: right;
+}
+.about_us_container .footer > .phone > span {
+  display: block;
+  padding-top: 10px;
+  text-align: right;
+}
+.about_us_container .footer > .email {
+  margin-right: 10%;
+  margin-top: 10px;
+  width: 100%;
+  display: inline-block;
+  position: relative;
+  float: right;
+}
+.about_us_container .footer > .email > .email {
+  display: block;
+  padding-top: 10px;
+  text-align: right;
+  text-decoration: none;
+  color: rgba(255, 255, 255, 1);
+}
+.about_us_container .footer > .copyright {
+  display: inline-block;
+  margin: 70px 0 60px 10%;
+  width: 80%;
+  position: relative;
+}
+
+@media (max-width: 900px) {
+  .about_us_container .header > #nav + label + nav.circle {
+    display: none;
+    width: 120px;
+    padding: 10px;
+    background-color: #292c2f;
+  }
+
+  .about_us_container .header > #nav:checked + label + nav.circle {
+    display: block;
+  }
+
+  .about_us_container .header > nav.circle > ul {
+    display: block;
+    width: 100%;
+    text-align: left;
+  }
+
+  .about_us_container .header > nav.circle > ul > li {
+    display: block;
+  }
+
+  .about_us_container .header > nav.circle {
+    position: absolute;
+    top: 54px;
+    right: 0;
+    z-index: 100;
+    text-align: left;
+  }
+
+  .about_us_container .header > label {
+    display: inline-block;
+    float: right;
+    width: 48px;
+    height: 48px;
+    padding: 16px;
+  }
+}
+
+.about_us_container img {
+  border-radius: 50%;
+  width: clamp(100px, 40vw, 120px);
+  height: clamp(100px, 40vw, 120px);
+  object-fit: cover;
+  object-position: top;
+}
+
+.about_us_container .circle-top {
+  width: clamp(25rem, 30vw, 31.25rem);
+  position: absolute;
+  top: 3em;
+  left: -8em;
+  height: clamp(25rem, 30vw, 31.25rem);
+  background: hsla(211, 100%, 28%, 1);
+  background: radial-gradient(
+    circle,
+    #00458f8f 0%,
+    #00458e00 60%,
+    #ffffff00 100%
+  );
+  border-radius: 50%;
+}
+
+.about_us_container .circle-bottom {
+  width: clamp(25rem, 30vw, 31.25rem);
+  position: absolute;
+  bottom: -5em;
+  right: -8em;
+  height: clamp(25rem, 30vw, 31.25rem);
+  background: hsla(211, 100%, 28%, 1);
+  background: radial-gradient(
+    circle,
+    #00458f8f 0%,
+    #00458e00 65%,
+    #ffffff00 100%
+  );
+  border-radius: 50%;
+}
+
+.about_us_container header {
+  background: linear-gradient(to top, #1f2c3a 0%, #2f3c4742 100%),
+    url("https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
+      no-repeat 50% 50% / cover;
+  width: 100%;
+  min-height: 25em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #fff;
+}
+
+.header-content {
+  width: min(37.5em, 90%);
+  margin-top: 5em;
+  position: relative;
+  z-index: 10;
+}
+
+.about_us_container .header-content span {
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 0.063rem;
+  font-size: clamp(0.8rem, 0.7625rem + 0.1875vw, 0.95rem);
+}
+
+.about_us_container .header-content h1 {
+  font-size: clamp(1.5rem, 1.375rem + 0.625vw, 2rem);
+  font-weight: 700;
+}
+
+.about_us_container section {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 75em;
+  margin-inline: auto;
+  gap: 0.938rem;
+  transform: translatey(-3em);
+  position: relative;
+  z-index: 10;
+}
+
+.about_us_container .card {
+  padding: 1.875em 1.25em;
+  max-width: 18.75rem;
+  width: 90%;
+  height: 16.875rem;
+  display: grid;
+  place-content: center;
+}

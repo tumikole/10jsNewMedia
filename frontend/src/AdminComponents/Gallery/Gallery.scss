@@ -1,0 +1,44 @@
+.adminGallery {
+  height: 100vh;
+  overflow: scroll;
+  .galleryHeader {
+    h1 {
+      text-align: center;
+      color: white;
+      margin-top: 3rem;
+      border-bottom: 1px solid white;
+    }
+
+    .galleryTab {
+      margin-top: 3rem;
+      ul {
+        display: grid;
+        grid-template-columns: auto auto;
+        gap: 2rem;
+        width: 40%;
+        margin: auto;
+        li {
+          list-style: none;
+
+          button {
+            color: white;
+            width: 100%;
+          }
+        }
+      }
+    }
+    .galleryCategoryTab {
+      ul {
+        display: flex;
+
+        .selectedCat {
+          color: white;
+          border-bottom: 1px solid #2159b9;
+        }
+        .unselectedCat {
+          color: white;
+        }
+      }
+    }
+  }
+}

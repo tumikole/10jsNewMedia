@@ -1,0 +1,14 @@
+.NothingToDisplay {
+  .headerText {
+    position: relative;
+    h1 {
+      position: absolute;
+      top: 20rem;
+      bottom: 20rem;
+      right: 15rem;
+      left: 15rem;
+      color: white;
+      font-size: 5rem;
+    }
+  }
+}

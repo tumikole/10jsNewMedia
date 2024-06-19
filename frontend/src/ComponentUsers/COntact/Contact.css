@@ -1,0 +1,113 @@
+.contactLandingContainer {
+  background-color: #1b2431 !important;
+}
+
+.contactLanding {
+  background-image: url("../../Asserts/cinema-eos-range-with-c700_81257a02dd5b4f2884e24a6c4ebcdf15.jpeg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+}
+
+.contactHeaderContainer {
+  padding-top: 250px;
+}
+
+.contactHeaderContainer .contactHeaderWrapper {
+  background-color: #ffffff4d;
+  margin-top: 90px !important;
+  box-shadow: 20px 20px 20px rgba(0, 238, 255, 0.37); /* Add box shadow properties here */
+  width: 60%;
+  margin: auto;
+  padding: 2rem;
+  border: 2px solid #0ef;
+  border-radius: 20px;
+}
+
+.contactHeadingSub {
+  color: #0ef;
+  font-size: 15px;
+  text-align: center;
+  padding-bottom: 30px;
+}
+.contactHeading {
+  color: #0ef;
+  font-size: 25px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.contactHeaderContainer .buttonContainer {
+  margin-top: 3rem !important;
+  width: 25%;
+  margin: auto;
+  color: goldenrod !important;
+  align-items: center;
+}
+
+.contactUsFormWrapper {
+  display: grid !important;
+  grid-template-columns: 40% 60%;
+  border-radius: 10px !important;
+  border: 4px solid #0ef;
+  width: 40%;
+  margin: auto;
+  margin-top: 3rem;
+  margin-bottom: 3rem !important;
+  overflow: hidden !important;
+}
+
+.contactUsInputConctainer {
+  margin-top: 1rem !important;
+}
+.contactUsInputConctainer button {
+width: 100%;
+}
+
+.contactUsInputConctainer label{
+    color: #0ef;
+    margin-bottom: .5rem !important;
+}
+
+.contactUsForm {
+    background-image: url("../../Asserts/iStock-958871814.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    padding: 1rem !important;
+}
+
+.contactUsFormInfo {
+  background-image: url("../../Asserts/landingPage2.webp");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.contactHeader{
+    text-align: left !important;
+    margin-left: 1rem !important;
+    margin-top: 1rem !important;
+}
+
+.information{
+    text-align: left !important;
+    margin-left: 1rem !important;
+    margin-top: 1rem !important;
+}
+
+.information div {
+    margin-bottom: 1rem !important;
+    margin-left: 1rem !important;
+}
+
+.information div h5{
+    color: #0ef;
+}
+
+.information div p{
+    color: #0ef;
+    position:absolute !important;
+    bottom: 2rem;
+}

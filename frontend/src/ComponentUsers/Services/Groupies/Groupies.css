@@ -1,0 +1,116 @@
+.groupies{
+    background-color: #1b2431 !important;
+
+}
+
+.groupies h1 {
+    font-size: 2.5rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin-top: 2em;
+    margin-bottom: 0;
+}
+
+.groupies .text-accent {
+    color: #00A1AB;
+}
+
+.groupies .fs-500 {
+    font-size: 1.3125rem;
+    margin: 0;
+}
+
+.groupies .mb {
+    margin-bottom: 0.5em;
+}
+
+.groupies .plans {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 2em 0;
+}
+
+.groupies .plan {
+    width: 16.5rem;
+    padding: 2em;
+    border-radius: 1em;
+    margin: 0 0.5em 1em;
+}
+
+.groupies .plan--light {
+    color: #4E4E4E;
+    background: linear-gradient(-45deg, #E5E3E8, #FAFAFA);
+}
+
+.groupies .plan--light .plan-price {
+    color: #00A1AB;
+}
+
+.groupies .plan--light .btn {
+    color: #FFF;
+    background: #4E4E4E;
+}
+
+.groupies .plan--accent {
+    color: #FFF;
+    background: linear-gradient(-45deg, #00A1AB, #3741A0);
+}
+
+.groupies .plan--accent .btn {
+    color: #4E4E4E;
+    background: #FFF;
+}
+
+.groupies .plan-title {
+    text-transform: uppercase;
+    margin: 0 0 1em;
+}
+
+.groupies .plan-price {
+    margin: 0;
+    font-size: 3rem;
+    line-height: 1;
+    font-weight: 900;
+}
+
+.groupies .plan-price span {
+    display: block;
+    font-size: 1.5625rem;
+    font-weight: 300;
+}
+
+.groupies .plan-description {
+    margin: 2em 0;
+    line-height: 1.5;
+}
+
+.groupies .btn {
+    display: inline-block;
+    padding: 0.5em 0.75em;
+    border-radius: 0.25em;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: 700;
+    color: #FFF;
+    background: #00A1AB;
+    transition: 0.3s;
+}
+
+.groupies .btn:hover {
+    opacity: 0.7;
+}
+
+.groupies .btn-mb {
+    margin-bottom: 3em;
+}
+
+.groupies .btn--light {
+    color: #4E4E4E;
+    background: #FFF;
+}
+
+.groupies .btn--dark {
+    color: #FFF;
+    background: #4E4E4E;
+}

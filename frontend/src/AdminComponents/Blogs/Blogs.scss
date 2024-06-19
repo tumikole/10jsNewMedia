@@ -1,0 +1,38 @@
+.adminBlogs {
+  width: 100%;
+  height: 100vh;
+  overflow: scroll;
+  .adminBlogsHeader {
+    width: 100%;
+    border-bottom: 1px solid white;
+
+    .header {
+      width: 100%;
+      padding: 0 !important;
+
+      h1 {
+        color: white;
+        font-size: 1.5rem;
+        margin-left: 1rem;
+      }
+    }
+  }
+  .adminBogTabs {
+    margin-top: 3rem;
+    ul {
+      display: grid;
+      grid-template-columns: auto auto auto;
+      gap: 2rem;
+      width: 40%;
+      margin: auto;
+      li {
+        list-style: none;
+        button {
+          width: 100%;
+        }
+      }
+    }
+  }
+  .adminBlogsBody {
+  }
+}

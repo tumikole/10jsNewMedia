@@ -1,0 +1,31 @@
+.adminGalleryView {
+  .galleryViewHeader {
+    margin-top: 3rem !important;
+
+    .search{
+        width: 40%;
+        margin: auto;
+        
+    }
+    ul {
+    margin-top: 3rem !important;
+      display: flex;
+      gap: 2rem;
+      .justList {
+        list-style: none;
+        color: white;
+        cursor: pointer;
+      }
+
+      .selectedAdmin{
+        border-bottom: 1px solid #2159b9;
+        list-style: none;
+        color: white;
+        cursor: pointer;
+      }
+    }
+  }
+  .galleryViewBody {
+    // margin-top: 3rem !important;
+  }
+}

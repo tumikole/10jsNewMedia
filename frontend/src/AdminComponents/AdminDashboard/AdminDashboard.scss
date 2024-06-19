@@ -1,0 +1,146 @@
+.adminDashboard {
+  height: 100vh;
+  display: flex;
+  background-color: #273142;
+
+  .sideOne {
+    flex: 20%;
+    background-color: #2159b9;
+    height: 100vh;
+    overflow-x: scroll;
+
+    .user-info {
+      width: 98%;
+      margin: auto;
+      margin-top: 2rem;
+
+      .user-title {
+        h1 {
+          color: white;
+          margin-left: 1rem;
+          font-size: 2rem;
+        }
+
+        h4 {
+          color: white;
+          margin-left: 1rem !important;
+          font-size: 1.5rem;
+          margin-top: 2rem;
+        }
+      }
+
+      .user-profile {
+        margin-top: 2rem;
+
+        .avatar {
+          img {
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            margin-left: 1rem;
+          }
+        }
+        .user {
+          margin-top: 2rem;
+          h2 {
+            color: white;
+            text-align: left !important;
+            font-size: 1.5rem;
+            margin-left: 1rem;
+          }
+          h3 {
+            color: white;
+            text-align: left !important;
+            font-size: 1rem;
+            margin-left: 1rem;
+          }
+        }
+      }
+    }
+
+    .user-tabs {
+      ul {
+        box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2);
+        transition: 0.3s;
+        width: 95%;
+        margin: auto;
+        margin-top: 2rem;
+        padding: 0.5rem !important;
+
+        li {
+          padding: 0.3rem !important;
+          background-color: #2159b9;
+          border-radius: 20px;
+          border-bottom: 1px solid white;
+          width: 90%;
+          margin: auto;
+          margin-top: 0.5rem;
+          margin-bottom: 0.5rem;
+          color: white !important;
+text-decoration: none;
+list-style: none;
+          &:hover {
+            background-color: white;
+            color: #2159b9 !important;
+            border-bottom: 1px solid #2159b9;
+            cursor: pointer;
+
+          }
+        }
+      }
+    }
+
+    .user-settings-and-signout {
+      ul {
+        box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2);
+        transition: 0.3s;
+        width: 95%;
+        margin: auto;
+        margin-top: 2rem;
+        padding: 0.5rem !important;
+
+        li {
+          padding: 0.3rem !important;
+          background-color: #2159b9;
+          border-radius: 20px;
+          border-bottom: 1px solid white;
+          width: 90%;
+          margin: auto;
+          margin-top: 0.5rem;
+          margin-bottom: 0.5rem;
+          color: white !important;
+          list-style: none;
+
+          &:hover {
+            background-color: white;
+            color: #2159b9 !important;
+            border-bottom: 1px solid ç;
+            color: #2159b9 !important;
+            cursor: pointer;
+          }
+        }
+        .signout {
+          padding: 0.3rem !important;
+          background-color: goldenrod;
+          border-radius: 20px;
+          border-bottom: 1px solid yellow;
+          width: 90%;
+          margin: auto;
+          margin-top: 0.5rem;
+          margin-bottom: 0.5rem;
+          cursor: pointer;
+
+          &:hover {
+            background-color: yellow;
+            border-bottom: 1px solid #2159b9;
+            color: #2159b9 !important;
+          }
+        }
+      }
+    }
+  }
+
+  .sideTwo {
+    flex: 80%;
+  }
+}

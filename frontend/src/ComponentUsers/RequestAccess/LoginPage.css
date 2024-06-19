@@ -1,0 +1,94 @@
+.loginPageContainer {
+  /* background: #44c4e7 */
+  background-image: url("https://www.gauteng.net/wp-content/uploads/2022/05/johannesburg-4322256_1920.jpg") !important;
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.FormContainer{
+  width: 25%;
+  margin: auto;
+  margin-top: 10rem;
+  border: 1px solid #0ef;
+  padding: 1rem;
+  border-radius: 10px;
+  background-color: #369cb880;
+  box-shadow: 5px 10px #888888;
+
+}
+
+.loginPageContainer .form {
+  width: 100%;
+  margin-top: 2rem;
+}
+
+.loginPageContainer .form form {
+  width: 15%;
+  margin: auto;
+}
+.loginPageContainer .form h2 {
+  margin: 0 0 20px;
+  line-height: 1;
+  color: #44c4e7;
+  font-size: 18px;
+  font-weight: 400;
+}
+.loginPageContainer .form input {
+  outline: none;
+  display: block;
+  width: 100%;
+  margin: 0 0 20px;
+  padding: 10px 15px;
+  border: 1px solid #ccc;
+  color: #ccc;
+  font-family: "Roboto";
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  font-size: 14px;
+  font-wieght: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-transition: 0.2s linear;
+  -moz-transition: 0.2s linear;
+  -ms-transition: 0.2s linear;
+  -o-transition: 0.2s linear;
+  transition: 0.2s linear;
+}
+.loginPageContainer .form input:focus {
+  color: #333;
+  border: 1px solid #44c4e7;
+}
+.loginPageContainer .form button {
+  cursor: pointer;
+  background: #44c4e7;
+  width: 100%;
+  padding: 10px 15px;
+  border: 0;
+  color: #fff;
+  font-family: "Roboto";
+  font-size: 14px;
+  font-weight: 400;
+}
+.loginPageContainer .form button:hover {
+  background: #369cb8;
+}
+
+.client-link {
+  color: white;
+  border-top: 1px solid #0ef;
+  font-size: 18px;
+  border-top: 1px solid #0ef;
+  border-bottom: 1px solid #0ef;
+  text-align: center;
+}
+
+.client-link:hover {
+  color: blue;
+  cursor: pointer;
+}

@@ -1,0 +1,396 @@
+.galleryContainer {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0;
+  right: 0;
+  height: 100vh;
+  background-image: url("../../../Asserts/dee7.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.galleryMainContainer {
+  display: flex;
+  border: 1px solid rgba(128, 128, 128, 0.466);
+  width: 100%;
+  margin: auto;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0;
+  right: 0;
+  height: 100vh;
+  padding: 0 !important;
+}
+
+.galleryMainContainerSideOne {
+  width: 20%;
+  background-color: black;
+  position: relative;
+  border-right:1px solid #0ef;
+}
+
+.galleryMainContainerSideOneH1 {
+  color: #0ef;
+  font-size: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  background-color: #0ef;
+  color: #000000;
+}
+.galleryMainContainerSideTwo {
+  position: relative;
+  width: 100%;
+  overflow-y: scroll;
+  height: 90vh;
+  background-color: transparent;
+}
+
+.galleryTitle {
+  font-size: 2rem;
+  text-align: center;
+  color: #0ef;
+  margin-top: 4.9rem;
+}
+
+.css-52dxnr[aria-selected="true"] {
+  color: #165ce8;
+}
+.css-52dxnr[aria-selected="false"] {
+  color: #0ef;
+}
+
+.galleryNavTwo {
+  display: flex;
+  width: 80%;
+  transition: background-image 0.5s ease-in-out;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.galleryNavOne .list {
+  width: 65%;
+  margin: auto;
+}
+
+.ImagesContainer {
+  height: 700px; /* Set the height of the scrollable div */
+  overflow-y: scroll; /* Enable vertical scrolling */
+}
+
+.image-details {
+  padding: 0.5rem;
+}
+
+.leftSideHeaders {
+  color: black !important;
+}
+
+.leftSideCategoryContainer ul {
+  color: #0ef;
+  padding-bottom: 1rem;
+  padding: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.leftSideCategoryContainer ul li {
+  color: #0ef;
+  padding-bottom: 0.5rem;
+  cursor: pointer;
+}
+.leftSideFolderNameDisplay {
+  height: 35vh;
+  overflow: auto;
+}
+
+.leftSideFolderNameDisplay {
+  color: #0ef;
+  padding-bottom: 1rem;
+}
+
+.leftSideFolderNameDisplay ul {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.folderLoading {
+  margin-top: 5rem;
+}
+
+.sourceLoading {
+  position: absolute;
+  left: 35rem;
+  top: 18rem;
+}
+.foldersNames {
+  list-style: none;
+  color: #0ef;
+  cursor: pointer;
+  padding: 0.5rem;
+
+  width: 100% !important;
+}
+
+.foldersNames:hover {
+  color: goldenrod;
+  width: 100% !important;
+}
+
+.selectedFoldersNames {
+  color: black !important;
+  width: 100% !important;
+  background-color: #0ef;
+  padding: 0.5rem;
+  margin-right: 0.5rem;
+  border-radius: 10px;
+}
+
+.subfolderChildren {
+  margin-top: 8px;
+  border-bottom: 1px solid black;
+  cursor: pointer;
+}
+
+.subfolderChildren:hover {
+  /* margin-top: 8px; */
+  cursor: pointer;
+  background-color: black;
+  color: #0ef;
+}
+
+.ShowButton {
+  color: black !important;
+  background-color: #0ef;
+  border-radius: 20px;
+  padding: 10px;
+  width: 100%;
+  text-align: center;
+}
+
+.ShowButton:hover {
+  background-color: grey !important;
+  cursor: pointer;
+  color: #0ef !important;
+}
+
+.ShowButton:first-child {
+  color: black;
+  background-color: #0ef;
+  cursor: pointer;
+  color: #0ef;
+}
+.image-gallery {
+  position: relative;
+  padding: 20px;
+  justify-content: center;
+  width: 100% !important;
+}
+.image-gallery .gallery-items {
+  width: 100%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  display: grid;
+  grid-template-columns: auto auto auto auto auto auto;
+  gap: 2rem;
+  padding: 1rem !important;
+}
+
+.chakra-button {
+  background-color: #0ef;
+}
+
+.image-gallery .gallery-items .item {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  overflow: hidden;
+  border-radius: 15px;
+  transition: transform 0.25s ease;
+  margin-left: 1.5rem;
+  border: 4px solid grey;
+}
+.gallery-items .item:hover {
+  border: 4px solid #0ef;
+}
+.image-gallery .gallery-items .item img {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.25s ease;
+}
+.item:hover img {
+  transform: scale(1.08);
+}
+.image-gallery .gallery-items .item .item-title {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+.image-gallery .gallery-items .item .transparent-back {
+  position: absolute;
+  background-color: #000000;
+  width: 100%;
+  height: 100%;
+  top: 50%;
+  left: 50%;
+  opacity: 0;
+  transform: translateX(-50%) translateY(-50%);
+}
+.image-gallery .gallery-items .item .transparent-back:hover {
+  opacity: 0;
+  animation: 0.25s fade-back forwards ease;
+}
+@keyframes fade-back {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0.5;
+  }
+}
+.item-title .title-text > p:nth-child(1) {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 100%;
+  font-size: 1.5em;
+  pointer-events: none;
+  transform: translateX(-50%) translateY(-500%);
+  color: #ffffff;
+  opacity: 0;
+  text-align: center;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+.item-title:hover .title-text > p:nth-child(1) {
+  transform: translateX(-50%) translateY(-60%);
+  opacity: 1;
+  margin-bottom: 5px;
+}
+.title-text > p:nth-child(2) {
+  position: absolute;
+  width: 100%;
+  left: 50%;
+  top: 50%;
+  font-size: 1em;
+  pointer-events: none;
+  transform: translateX(-50%) translateY(500%);
+  color: #cccccc;
+  opacity: 0;
+  text-align: center;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+.item-title:hover .title-text > p:nth-child(2) {
+  transform: translateX(-50%) translateY(60%);
+  opacity: 1;
+}
+
+.searchGalleryInput {
+  background-color: black;
+  padding-bottom: 0.5rem;
+  padding: 1rem;
+  color: #0ef;
+}
+.searchInput {
+  /* padding-top: 1rem; */
+  width: 100%;
+  margin: auto;
+  color: #0ef;
+}
+
+.searchInput input {
+  background-color: transparent;
+  border-bottom: 1px solid #0ef;
+  border-top: 1px solid #0ef;
+  border-left: none;
+  border-right: none;
+  color: #0ef;
+}
+
+.galleryMainContainerSideTwoAdvert {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  height: 50vh;
+  padding-top: 1rem;
+}
+.galleryMainContainerSideTwoAdvertVideo {
+  height: 50vh;
+}
+
+.addSideOne {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.addSideOne .addContentDateAndName {
+  display: grid;
+}
+
+.addSideOne .addContentDateAndName h4 {
+  font-size: 1rem;
+  padding-bottom: 2.5rem;
+  color: white;
+}
+
+.addSideOne .addContentDateAndName h2 {
+  font-size: 3rem;
+}
+
+.addSideOne .addContentDateAndName h3 {
+  font-size: 2rem;
+  color: white;
+}
+
+.addSideTwo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.addSideTwo img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.galleryInfo {
+  position: sticky;
+  top: 0;
+  height: 6vh;
+  background-color: black;
+  z-index: 1000;
+}
+.galleryInfoContent ul {
+  display: flex;
+  gap: 3rem;
+  width: 70%;
+  margin: auto;
+  color: #0ef;
+  padding-top: 16px;
+}
+
+.galleryInfoContent ul li {
+  width: 100%;
+  text-align: left;
+}
+
+.homeLink {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-top: 1px solid #0ef;
+}
+.homeLink a {
+  display: flex;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: #0ef;
+  padding-top: 0.5rem;
+}
+
+/* //////////////////// */

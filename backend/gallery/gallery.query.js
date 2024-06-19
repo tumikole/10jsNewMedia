@@ -502,19 +502,48 @@ const deleteUser = (app) => {
   app.delete("/delete_user/:userId", async (req, res) => {
     try {
       const { userId } = req.params;
-      const { error } = await supabase
+      
+      // Check if the user exists in admin_user table
+      const { data: adminUser, error: adminError } = await supabase
         .from("admin_user")
+        .select()
+        .eq("id", userId);
+      
+      // Check if the user exists in client_user table
+      const { data: clientUser, error: clientError } = await supabase
+        .from("client_user")
+        .select()
+        .eq("id", userId);
+      
+      let deletedUser;
+      let tableName;
+
+      // Determine the table from which the user will be deleted
+      if (adminUser && adminUser.length > 0) {
+        deletedUser = adminUser[0];
+        tableName = "admin_user";
+      } else if (clientUser && clientUser.length > 0) {
+        deletedUser = clientUser[0];
+        tableName = "client_user";
+      } else {
+        return res.status(404).json({ success: false, error: "User not found" });
+      }
+
+      // Delete the user from the appropriate table
+      const { data: deletedData, error: deleteError } = await supabase
+        .from(tableName)
         .delete()
         .eq("id", userId)
-        .select();
+        .single();
 
-      if (error) {
-        throw error;
+      if (deleteError) {
+        throw deleteError;
       }
 
       res.status(200).json({
+        deletedUser: deletedData,
         success: true,
-        message: `User with ID ${userId} has been deleted.`,
+        message: `User with ID ${userId} has been deleted from ${tableName}.`,
       });
     } catch (error) {
       console.error("Error:", error);
@@ -522,6 +551,7 @@ const deleteUser = (app) => {
     }
   });
 };
+
 
 const loginUser = (app, jwtSecret) => {
   app.post("/login", async (req, res) => {
@@ -657,11 +687,9 @@ const addService = (app) => {
 const getAllServices = (app) => {
   app.get("/get_all_services", async (req, res) => {
     try {
-      // Query all services from the admin_price_and_services table
       const { data: services, error } = await supabase
         .from("admin_price_and_services")
-        .select("*");
-
+        .select();
       if (error) {
         throw error;
       }
@@ -688,10 +716,6 @@ const getAllPermissons = (app) => {
         .from("user_permissions")
         .select("*");
 
-      if (error) {
-        throw error;
-      }
-
       res.status(200).json({
         success: true,
         data: permissions,
@@ -712,7 +736,7 @@ const viewAllSource = (app) => {
       // Query all sources from the source table
       const { data: sources, error } = await supabase
         .from("source")
-        .select("*");
+        .select();
 
       if (error) {
         throw error;
@@ -1384,7 +1408,6 @@ const createPost = (app) => {
           .select();
 
         if (insertPostError) {
-          console.log("Error creating post");
           throw insertPostError;
         }
 

@@ -1,0 +1,15 @@
+.videoGallery {
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+  padding: 1rem;
+}
+
+.videoGallery video {
+  padding: 1rem;
+}
+
+.videoGallery video:hover {
+  border: 2px solid #0ef;
+  padding: 1rem;
+  cursor: pointer;
+}

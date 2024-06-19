@@ -1,0 +1,52 @@
+.homeClientPost {
+margin-bottom: 2rem;
+}
+
+.clientPostContainer {
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: 33.3% 33.3% 33.3% ;
+    width: 90%;
+    margin: auto;
+  }
+  
+  .postWrapper{
+    background-image: url("../../../Asserts/card-background.webp");
+    margin: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 1rem;
+    box-shadow: 0 0 10px #ccc;
+  }
+
+  .clientPostImage{
+    height: 80px;
+    width: 80px;
+    border-radius: 100%;
+    margin: auto !important;;
+    box-shadow: 0 0 10px #ccc;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+    z-index: 0;
+    overflow: hidden;
+    margin-bottom: 1rem !important;
+
+  }
+
+  .clientPostUsername{
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 1rem !important;
+    color: #0ef !important;
+  }
+
+  .clientPostDetails{
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 1rem !important;
+    color: #0ef !important;
+  }

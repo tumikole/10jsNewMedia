@@ -1,0 +1,25 @@
+.adminForms {
+  width: 40%;
+  margin: auto;
+  margin-top: 3rem !important;
+  .adminForm {
+    padding: 2rem;
+    .header {
+      text-align: center !important;
+      color: white;
+    }
+    .formInputs {
+      .inputs {
+
+        .labelContainer{
+            display: block;
+            label {
+              display: flex !important;
+              color: white !important;
+              padding: 1rem !important;
+            }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,140 @@
+
+
+/* //////////////////////// */
+
+.pricing-tables {
+}
+
+.pricing-table {
+  text-align: center;
+  background: #fff;
+  padding: 30px 0;
+  transition: all .2s ease-in-out;
+}
+
+.pricing-table:hover .pricing-table-button {
+  transform: scale(1.1);
+  box-shadow: 0 0 15px #ccc;
+  animation: glow-grow 2s ease-out infinite;
+}
+
+.pricing-table .title {
+  font-size: 30px;
+  font-weight: 500;
+  color: #0D1F2D;
+  margin: 0 0 30px 0;
+}
+
+.pricing-table .price-value {
+  padding: 30px 0;
+  background: #0ef;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.pricing-table .price-value:before {
+  content: "";
+  border-top: 15px solid #fff;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  position: absolute;
+  top: 0;
+  left: 46%;
+}
+
+.pricing-table .price-title {
+  display: block;
+  font-size: 15px;
+  font-weight: 900;
+  color: #fff;
+}
+
+.pricing-table .price {
+  display: inline-block;
+  font-size: 50px;
+  color: #fff;
+  position: relative;
+}
+
+.pricing-table .currency {
+  display: inline-block;
+  margin-bottom: 10px;
+  vertical-align: bottom;
+  font-size: 22px;
+  font-weight: 400;
+  color: #f0f0f0;
+}
+
+.pricing-table .value-small {
+  display: inline-block;
+  margin-top: 15px;
+  vertical-align: top;
+  font-size: 22px;
+  font-weight: 300;
+  color: #f0f0f0;
+}
+
+.pricing-table .pricing-content {
+  padding: 0;
+  margin: 0 0 30px 0;
+  list-style: none;
+}
+
+.pricing-table .pricing-content li {
+  font-size: 16px;
+  color: #546A7B;
+  line-height: 35px;
+}
+
+.pricing-table .pricing-content li:nth-of-type(2n+1) {
+  background-color: #fafafa;
+}
+
+.pricing-table .pricing-table-button {
+  display: inline-block;
+  padding: 8px 40px;
+  background: #fff;
+  color: #0ef;
+  font-size: 15px;
+  font-weight: 600;
+  border: 2px solid #FAD32E;
+  border-radius: 2px;
+  transition: all 0.5s ease 0s;
+  text-decoration: none;
+
+}
+
+.pricing-table .pricing-table-button:hover {
+  background: #FAD32E;
+  color: #fff;
+  text-decoration: none;
+}
+
+@media only screen and (max-width: 990px) {
+  .pricing-table {
+    margin-bottom: 30px;
+  }
+}
+
+.pricing-sub{
+  margin-top: 3rem !important;
+  margin-bottom: 3rem !important;
+  width: 90%;
+  margin: auto;
+}
+
+.pricing-sub h3{
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-align: center;
+  margin-top: 1rem !important;
+  color: #0ef !important;
+}
+
+.pricing-sub h4{
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-align: center;
+  margin-top: 1rem !important;
+  color: #0ef !important;
+}

@@ -1,0 +1,141 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700");
+
+.Personal{
+  background-color: #1b2431 !important;
+
+}
+.Personal .container {
+  margin: auto;
+  display: grid;
+  gap: 1rem;
+  width: 90%;
+  max-width: 1000px;
+  padding: 2rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.Personal .pricecard {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.Personal .pricecard h2 {
+  font-weight: 600;
+  font-size: 2.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.Personal .pricecard .sub {
+  line-height: 1.25;
+}
+
+.Personal .pricecard:nth-of-type(1) .head {
+  background-image: conic-gradient(
+    at center top,
+    rgb(254, 240, 148),
+    rgb(250, 204, 21),
+    rgb(191, 128, 37)
+  );
+}
+
+.Personal .pricecard:nth-of-type(2) .head {
+  background-image: conic-gradient(
+    at center top,
+    rgb(134, 239, 172),
+    rgb(59, 130, 246),
+    rgb(147, 51, 234)
+  );
+}
+
+.Personal .pricecard:nth-of-type(3) .head {
+  background-image: conic-gradient(
+    at center top,
+    rgb(224, 169, 38),
+    rgb(138, 55, 217),
+    rgb(89, 130, 246)
+  );
+}
+
+.Personal .pricecard .head {
+  padding: 1.5rem;
+  border-radius: 1rem;
+  margin-bottom: 0.5rem;
+  height: 10rem;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.25s ease-in-out;
+  color: #ffffff;
+  border: 1px solid #ffffff;
+  cursor: pointer;
+}
+
+.Personal .pricecard .head:hover {
+  transform: scale(1.04);
+  box-shadow: 0px 5px 7px -6px rgba(0, 0, 0, 0.08),
+    0px 8px 13.5px -6px rgba(0, 0, 0, 0.12),
+    0px 16px 36px -6px rgba(0, 0, 0, 0.15);
+}
+
+.Personal .pricecard .price {
+  font-weight: 600;
+  font-size: 3rem;
+  margin-top: auto;
+  line-height: 0.85;
+}
+
+.Personal .pricecard .details {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  color: #444444;
+}
+
+.Personal .pricecard .details .row {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  padding: 0.5rem 1.5rem 1.5rem;
+  border-bottom: 1px solid #ececec;
+  transition: all 0.2s ease-in-out;
+}
+
+.Personal .pricecard .details .row:hover {
+  gap: 1.25rem;
+}
+
+.Personal .pricecard .details .row:last-of-type {
+  border-bottom: none;
+}
+
+.Personal .pricecard .details .row svg {
+  width: 0.75rem;
+  height: 0.75rem;
+  fill: #444444;
+}
+
+.Personal button {
+  all: unset;
+  width: 100%;
+  text-align: center;
+  background-color: #222222;
+  color: #ffffff;
+  display: inline-block;
+  border-radius: 0.5rem;
+  padding: 1rem 0;
+  cursor: pointer;
+  margin-top: auto;
+  transition: all 0.25s ease-in-out;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 0.875rem;
+  letter-spacing: 0.75px;
+}
+
+.Personal button:hover {
+  transform: scale(1.04);
+  background-color: #333333;
+  box-shadow: 0px 5px 7px -6px rgba(0, 0, 0, 0.08),
+    0px 8px 13.5px -6px rgba(0, 0, 0, 0.12),
+    0px 16px 36px -6px rgba(0, 0, 0, 0.15);
+}
