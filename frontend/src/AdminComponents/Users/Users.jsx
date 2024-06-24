@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import "./Users.scss";
 import axios from "axios";
 import ModalShow from "../Modal/Modal";
-import { v4 as uuidv4 } from "uuid";
+import Spinner from "../../Spinners/Spinner";
+import Alerts from "../Alerts/Alerts";
 
 export const Users = ({ adminEmail }) => {
   const [header, setHeader] = useState("Users");
@@ -11,31 +12,67 @@ export const Users = ({ adminEmail }) => {
   const [firstname, setFirstname] = useState(null);
   const [lastname, setLastname] = useState(null);
   const [email, setEmail] = useState(null);
-  const [role, setRole] = useState(null);
   const [userPermission, setUserPermission] = useState(null);
-  const [clientPromCode, setClientPromCode] = useState(null);
-
   const [selectedRole, setSelectedRole] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [successMessage, setSuccessMessage] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
 
   const [show, setShow] = useState(false);
 
   const url = "http://localhost:4000/";
 
   const addUsers = async () => {
-    const clientUser 
-    if (role === "Client") {  
-      const res = await axios.post(`${url}add_client_user`, )
+    const user = {
+      firstName: firstname,
+      lastName: lastname,
+      email,
+      role: selectedRole,
+      permissions: userPermission,
+    };
+
+    try {
+      const res = await axios.post(`${url}request_users`, user);
+      console.log({ first: res.data });
+      if (res.data.success) {
+        setSuccessMessage(res.data.message);
+        setTimeout(() => {
+          setSuccessMessage(null);
+        }, 5000);
+      }
+    } catch (error) {
+      setErrorMessage("User not succefully added");
+      setTimeout(() => {
+        setSuccessMessage(null);
+      }, 5000);
     }
-  }
+  };
 
   const setAdminUsers = async () => {
-    const res = await axios.get(`${url}request_users`);
-    setUsers(res.data.data);
+    setUsers([]);
+    try {
+      const res = await axios.get(`${url}request_users`);
+      setUsers(res.data.data);
+    } catch (error) {
+      setErrorMessage("Loading users failed");
+      setTimeout(() => {
+        setSuccessMessage(null);
+      }, 5000);
+    }
   };
 
   const setClientUsers = async () => {
-    const res = await axios.get(`${url}request_client_users`);
-    setUsers(res.data.data);
+    setUsers([]);
+    try {
+      const res = await axios.get(`${url}request_client_users`);
+      setUsers(res.data.data);
+      console.log({ first: res.data.data });
+    } catch (error) {
+      setErrorMessage("Loading users failed");
+      setTimeout(() => {
+        setSuccessMessage(null);
+      }, 5000);
+    }
   };
 
   const handleSearch = (e) => {
@@ -46,33 +83,57 @@ export const Users = ({ adminEmail }) => {
     setUsers(filteredUsers);
   };
 
-  console.log({ selectedRole });
   const handleShow = () => setShow(true);
 
+  const deleteUser = async (id) => {
+    const deletedUser = await axios.delete(`${url}delete_user/${id}`);
+    setLoading(true);
+    if (deletedUser.data.success) {
+      setLoading(false);
+
+      const deletedUserEmail = deletedUser.data.deletedUser[0].email;
+      const updatedUsers = users.filter(
+        (user) => user.email !== deletedUserEmail
+      );
+      console.log({ deletedUserEmail, updatedUsers });
+      setUsers(updatedUsers);
+      setSuccessMessage(deletedUser.data.message);
+      clearUserInputsFields();
+      setTimeout(() => {
+        setSuccessMessage(null);
+      }, 5000);
+    }
+  };
+
+  const clearUserInputsFields = () => {
+    setFirstname("");
+    setLastname("");
+    setEmail("");
+    setUserPermission([]);
+    setSelectedRole(null);
+  };
+
   useEffect(() => {
-    const getAllPermissions = async () => {
-      const res = await axios.get(`${url}get_all_permissions`);
-      if (res.data.data) {
-        setPermissions(res.data.data);
-      } else {
-        alert("Network problem  ");
+    try {
+      const getAllPermissions = async () => {
+        const res = await axios.get(`${url}get_all_permissions`);
+        console.log({ res });
+        if (res.data.data) {
+          setPermissions(res.data.data);
+        } else {
+          alert("Network problem");
+        }
+      };
+
+      if (header === "Add") {
+        setUsers([]);
       }
-    };
-
-    if (selectedRole) {
-      const code = uuidv4();
-      setClientPromCode(code);
-    }
-
-    if (header === "Add") {
-      setUsers([]);
-    }
-
-    return () => {
-      if (permissions.length <= 0) {
-        getAllPermissions();
-      }
-    };
+      return () => {
+        if (permissions.length <= 0) {
+          getAllPermissions();
+        }
+      };
+    } catch (error) {}
   }, [permissions, header, selectedRole]);
 
   return (
@@ -158,11 +219,11 @@ export const Users = ({ adminEmail }) => {
                   <td>
                     <input
                       type="text"
-                      name=""
+                      name="firstname"
                       className="form-control"
-                      id=""
                       placeholder="Firstname..."
                       onChange={(e) => setFirstname(e.target.value)}
+                      value={firstname}
                     />
                   </td>
                   <td>
@@ -174,6 +235,7 @@ export const Users = ({ adminEmail }) => {
                       placeholder="Lastname..."
                       onChange={(e) => setLastname(e.target.value)}
                       disabled={!firstname}
+                      value={lastname}
                     />
                   </td>
                   <td>
@@ -184,15 +246,26 @@ export const Users = ({ adminEmail }) => {
                       id=""
                       placeholder="Email..."
                       onChange={(e) => setEmail(e.target.value)}
+                      value={email}
                       disabled={!lastname}
                     />
                   </td>
                   <td>
-                    {selectedRole ? (
+                    {permissions.length <= 0 ? (
+                      <button class="btn btn-info" type="button" disabled>
+                        <span
+                          class="spinner-grow spinner-grow-sm"
+                          role="status"
+                          aria-hidden="true"
+                        ></span>
+                        Loading roles...
+                      </button>
+                    ) : selectedRole ? (
                       <button
                         className="btn btn-info"
                         onClick={handleShow}
                         disabled={!email}
+                        value={selectedRole}
                       >
                         {selectedRole}
                       </button>
@@ -209,11 +282,21 @@ export const Users = ({ adminEmail }) => {
 
                   <td>
                     <div className="acceptDeleteWrapper">
+                      {loading ? (
+                        <div class="spinner-border" role="status">
+                          <span class="visually-hidden">Loading...</span>
+                        </div>
+                      ) : (
+                        <div className="acceptDelete" onClick={addUsers}>
+                          <box-icon name="check" color="#008000"></box-icon>
+                        </div>
+                      )}
                       <div className="acceptDelete">
-                        <box-icon name="check" color="#008000"></box-icon>
-                      </div>
-                      <div className="acceptDelete">
-                        <box-icon name="trash" color="#ff0000"></box-icon>
+                        <box-icon
+                          name="trash"
+                          color="#ff0000"
+                          onClick={clearUserInputsFields}
+                        ></box-icon>
                       </div>
                     </div>
                   </td>
@@ -244,7 +327,7 @@ export const Users = ({ adminEmail }) => {
                 })}
             </div>
           </div>
-        ) : (
+        ) : users.length > 0 ? (
           <div
             className="userList"
             style={{ display: users.length > 0 ? "block" : "none" }}
@@ -256,6 +339,7 @@ export const Users = ({ adminEmail }) => {
                   <th scope="col">Lastname</th>
                   <th scope="col">Role</th>
                   <th scope="col">Status</th>
+                  {/* <th scope="col">Client promo code</th> */}
                   <th scope="col">Action</th>
                 </tr>
               </thead>
@@ -303,7 +387,10 @@ export const Users = ({ adminEmail }) => {
                                 ></box-icon>
                               </div>
                             ) : (
-                              <div className="deleteView">
+                              <div
+                                className="deleteView"
+                                onClick={() => deleteUser(user.id)}
+                              >
                                 <box-icon
                                   name="trash"
                                   color="#ff0000"
@@ -318,6 +405,8 @@ export const Users = ({ adminEmail }) => {
               </tbody>
             </table>
           </div>
+        ) : (
+          <Spinner />
         )}
       </div>
 
@@ -326,7 +415,11 @@ export const Users = ({ adminEmail }) => {
         setShow={setShow}
         content={permissions}
         setSelectedRole={setSelectedRole}
+        permissions={permissions}
+        setUserPermission={setUserPermission}
       />
+      <Alerts successMessage={successMessage} errorMessage={null} />
+      {/* <Alerts successMessage={successMessage} errorMessage={errorMessage} /> */}
     </div>
   );
 };

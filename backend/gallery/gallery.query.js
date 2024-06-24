@@ -307,17 +307,23 @@ const updateSourceToDisplayInLandingPage = (app) => {
 const addRequestUsers = (app) => {
   app.post("/request_users", async (req, res) => {
     const clientCode = v4();
+    console.log({clientCode})
     try {
       const {
         firstName,
         lastName,
         email,
-        avatar,
+        avatar = null,
         role,
         permissions,
         status = false,
         clientCodeStatus = false,
       } = req.body;
+
+
+
+      console.log(
+        {request: req.body})
       let table;
       let existingUsers;
 
@@ -376,7 +382,7 @@ const addRequestUsers = (app) => {
       res.status(201).json({
         success: true,
         data: result,
-        message: "User requested access successfully",
+        message: "User successfully added",
       });
     } catch (error) {
       // Return an error response if an exception occurs
@@ -502,19 +508,19 @@ const deleteUser = (app) => {
   app.delete("/delete_user/:userId", async (req, res) => {
     try {
       const { userId } = req.params;
-      
+
       // Check if the user exists in admin_user table
       const { data: adminUser, error: adminError } = await supabase
         .from("admin_user")
         .select()
         .eq("id", userId);
-      
+
       // Check if the user exists in client_user table
       const { data: clientUser, error: clientError } = await supabase
         .from("client_user")
         .select()
         .eq("id", userId);
-      
+
       let deletedUser;
       let tableName;
 
@@ -526,7 +532,9 @@ const deleteUser = (app) => {
         deletedUser = clientUser[0];
         tableName = "client_user";
       } else {
-        return res.status(404).json({ success: false, error: "User not found" });
+        return res
+          .status(404)
+          .json({ success: false, error: "User not found" });
       }
 
       // Delete the user from the appropriate table
@@ -534,7 +542,7 @@ const deleteUser = (app) => {
         .from(tableName)
         .delete()
         .eq("id", userId)
-        .single();
+        .select();
 
       if (deleteError) {
         throw deleteError;
@@ -552,11 +560,10 @@ const deleteUser = (app) => {
   });
 };
 
-
 const loginUser = (app, jwtSecret) => {
   app.post("/login", async (req, res) => {
     try {
-      const { email, password } = req.body;
+      const { email,   } = req.body;
 
       // Query admin users
       const { data: adminUsers, error: adminError } = await supabase
@@ -734,9 +741,7 @@ const viewAllSource = (app) => {
   app.get("/view_all_source", async (req, res) => {
     try {
       // Query all sources from the source table
-      const { data: sources, error } = await supabase
-        .from("source")
-        .select();
+      const { data: sources, error } = await supabase.from("source").select();
 
       if (error) {
         throw error;

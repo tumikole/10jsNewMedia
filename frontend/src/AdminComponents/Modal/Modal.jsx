@@ -3,7 +3,7 @@ import "./Modal.scss";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
-const ModalShow = ({ show, setShow, content, setSelectedRole }) => {
+const ModalShow = ({ show, setShow, content, setSelectedRole, permissions, setUserPermission }) => {
   const [selectedItemId, setSelectedItemId] = useState(null);
   const [selectedItemRole, setSelectedItemRole] = useState(null);
 
@@ -14,12 +14,18 @@ const ModalShow = ({ show, setShow, content, setSelectedRole }) => {
   const handleClose = () => {
     setSelectedItemId(null);
     setSelectedItemRole(null);
+    setUserPermission([])
+
     setShow(false);
     setSelectedRole(null)
   };
 
   const handleCloseAndSaveTheRole = async () => {
     setSelectedRole(selectedItemRole);
+    const selectedPermissions = permissions.filter(item => item.role === selectedItemRole);
+    const selectedPermissionsArray = selectedPermissions[0].permissions;
+    const permissionKeys = Object.keys(selectedPermissionsArray);
+    setUserPermission(permissionKeys)
     setShow(false);
   };
 
@@ -54,7 +60,7 @@ const ModalShow = ({ show, setShow, content, setSelectedRole }) => {
           Close
         </Button>
         <Button variant="primary" disabled={!selectedItemId} onClick={handleCloseAndSaveTheRole}>
-          Save Changes
+          Save role
         </Button>
       </Modal.Footer>
     </Modal>
