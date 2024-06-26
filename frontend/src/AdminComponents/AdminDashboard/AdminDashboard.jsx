@@ -93,8 +93,7 @@ const AdminDashboard = ({
         </div>
       </div>
       <div className="sideTwo">
-        {/* trying to do domrthing like this */}
-        {/* <${selectedTab !== null ? selectedTab : Home} /> */}
+  
         {  selectedTab === "Settings" ? <Settings /> :selectedTab === "Messages" ? (
           <Messages />
         ) : selectedTab === "Services" ? (
@@ -110,7 +109,7 @@ const AdminDashboard = ({
         ) : selectedTab === "Blogs" ? (
           <Blogs />
         ) : selectedTab === "Users" ? (
-          <Users adminEmail={adminEmail}/>
+          <Users adminEmail={adminEmail} adminRole={adminRole}/>
         ) : selectedTab === "Gallery" ? (
           <Gallery />
         ) : (

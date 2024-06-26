@@ -4,8 +4,9 @@ import axios from "axios";
 import ModalShow from "../Modal/Modal";
 import Spinner from "../../Spinners/Spinner";
 import Alerts from "../Alerts/Alerts";
+import ViewUser from "./ViewUser/ViewUser";
 
-export const Users = ({ adminEmail }) => {
+export const Users = ({ adminEmail, adminRole }) => {
   const [header, setHeader] = useState("Users");
   const [users, setUsers] = useState([]);
   const [permissions, setPermissions] = useState([]);
@@ -17,6 +18,8 @@ export const Users = ({ adminEmail }) => {
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
+  const [selectedUser, setSelectdUser] = useState(null);
+  const [showUser, setShowUser] = useState(false);
 
   const [show, setShow] = useState(false);
 
@@ -40,6 +43,8 @@ export const Users = ({ adminEmail }) => {
           setSuccessMessage(null);
         }, 5000);
       }
+
+      setHeader(header !== "Client" ? "Admin" : header);
     } catch (error) {
       setErrorMessage("User not succefully added");
       setTimeout(() => {
@@ -53,6 +58,7 @@ export const Users = ({ adminEmail }) => {
     try {
       const res = await axios.get(`${url}request_users`);
       setUsers(res.data.data);
+      setShowUser(false);
     } catch (error) {
       setErrorMessage("Loading users failed");
       setTimeout(() => {
@@ -66,7 +72,7 @@ export const Users = ({ adminEmail }) => {
     try {
       const res = await axios.get(`${url}request_client_users`);
       setUsers(res.data.data);
-      console.log({ first: res.data.data });
+      setShowUser(false);
     } catch (error) {
       setErrorMessage("Loading users failed");
       setTimeout(() => {
@@ -104,6 +110,13 @@ export const Users = ({ adminEmail }) => {
       }, 5000);
     }
   };
+
+  const viewUser = async (user) => {
+    setSelectdUser(user);
+    setShowUser(true);
+    setHeader("User profile");
+  };
+  console.log({ showUser });
 
   const clearUserInputsFields = () => {
     setFirstname("");
@@ -178,7 +191,14 @@ export const Users = ({ adminEmail }) => {
         </div>
         <div
           className="searchAndFilter"
-          style={{ display: users.length > 0 ? "block" : "none" }}
+          style={{
+            display:
+              users.length > 0 &&
+              !showUser &&
+              (adminRole === "Super Admin" || adminRole === "Project Manager")
+                ? "flex"
+                : "none",
+          }}
         >
           <div className="searchContainer">
             <input
@@ -308,26 +328,47 @@ export const Users = ({ adminEmail }) => {
                 permissions.map((permission) => {
                   return (
                     <div
-                      class="card border-primary mb-3"
-                      style={{ maxWidth: "18rem" }}
                       key={permission.id}
+                      class="card"
+                      style={{ width: "18rem" }}
                     >
-                      <div class="card-header">{permission.role}</div>
-                      <div class="card-body text-primary">
-                        {Object.entries(permission.permissions).map(
-                          ([item, status]) => (
+                      <div class="card-body">
+                        <h5 class="card-title">{permission.role}</h5>
+
+                        {Object.entries(permission.permissions)
+                          // .slice(0, 4)
+                          .map(([item, status]) => (
                             <div key={item} className="card-text">
                               <p>{item}</p>
                             </div>
-                          )
-                        )}
+                          ))}
+                        {/* <a href="#" class="card-link">
+                          View entire permissions
+                        </a> */}
                       </div>
                     </div>
+
+                    // <div
+                    //   class="card border-primary mb-3"
+                    //   style={{ maxWidth: "18rem" }}
+                    //   key={permission.id}
+                    // >
+                    //   <div class="card-header">{permission.role}</div>
+                    //   <div class="card-body text-primary">
+                    //     {Object.entries(permission.permissions).map(
+                    //       ([item, status]) => (
+                    //         <div key={item} className="card-text">
+                    //           <p>{item}</p>
+                    //         </div>
+                    //       )
+                    //     )}
+                    //   </div>
+                    // </div>
                   );
                 })}
             </div>
           </div>
-        ) : users.length > 0 ? (
+        ) : users.length > 0 && !showUser ? (
           <div
             className="userList"
             style={{ display: users.length > 0 ? "block" : "none" }}
@@ -339,7 +380,6 @@ export const Users = ({ adminEmail }) => {
                   <th scope="col">Lastname</th>
                   <th scope="col">Role</th>
                   <th scope="col">Status</th>
-                  {/* <th scope="col">Client promo code</th> */}
                   <th scope="col">Action</th>
                 </tr>
               </thead>
@@ -372,7 +412,10 @@ export const Users = ({ adminEmail }) => {
                         )}
                         <td>
                           <div className="deleteViewWrapper">
-                            <div className="deleteView">
+                            <div
+                              className="deleteView"
+                              onClick={() => viewUser(user)}
+                            >
                               <box-icon
                                 name="low-vision"
                                 color="#2159b9"
@@ -405,6 +448,8 @@ export const Users = ({ adminEmail }) => {
               </tbody>
             </table>
           </div>
+        ) : showUser ? (
+          <ViewUser selectedUser={selectedUser} adminRole={adminRole} />
         ) : (
           <Spinner />
         )}
@@ -419,7 +464,6 @@ export const Users = ({ adminEmail }) => {
         setUserPermission={setUserPermission}
       />
       <Alerts successMessage={successMessage} errorMessage={null} />
-      {/* <Alerts successMessage={successMessage} errorMessage={errorMessage} /> */}
     </div>
   );
 };

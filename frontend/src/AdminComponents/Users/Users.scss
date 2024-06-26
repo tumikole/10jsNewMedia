@@ -81,12 +81,13 @@
     }
     .permissionList {
       display: grid;
-      grid-template-columns: auto auto auto auto auto;
+      grid-template-columns: auto auto auto;
       gap: 1rem;
       margin: auto;
       width: 98%;
       margin-top: 3rem;
-
+      height: 65vh !important;
+      overflow-x: scroll;
       .card-body {
         height: 40vh !important;
         overflow-x: scroll;

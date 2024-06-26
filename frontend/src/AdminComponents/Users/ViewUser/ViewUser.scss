@@ -1,0 +1,166 @@
+$base-color: #ebebeb;
+$accent-color: #222;
+$highlight-color: #64b0f6;
+
+.ViewUser {
+  background-color: #ebebeb;
+  width: 70%;
+  margin: auto;
+  .topper {
+    display: block;
+    float: left;
+    clear: both;
+    width: 99%;
+    max-width: 1252px;
+    font-family: sans-serif;
+    margin-top: 30px;
+
+    h1 {
+      font-size: 1.5em;
+      color: #fff;
+      //   background-color: #222;
+      padding: 10px;
+    }
+  }
+
+  .container {
+    border: 1px solid lighten(#ebebeb, 50);
+    padding: 30px 0;
+    @extend .topper;
+    margin-top: 0;
+    @mixin border-radius($values) {
+      border-radius: $values;
+    }
+    .photo {
+      width: 30%;
+      margin-left: 2%;
+      text-align: center;
+      display: block;
+      float: left;
+      clear: none;
+      padding-bottom: 30px;
+
+      p {
+        font-size: 1em;
+        font-weight: 800;
+        margin-top: 1rem;
+        color: white;
+      }
+
+      img {
+        border: 2px solid red;
+        width: 100%;
+        border-radius: 10%;
+        width: 200px;
+        height: 200px;
+      }
+    }
+
+    .personal {
+      display: block;
+      float: left;
+      margin-left: 1%;
+      width: 20%;
+
+      div {
+        margin: 20px 0;
+
+        h3 {
+          font-size: 1.3em;
+          font-weight: 600;
+        }
+
+        a {
+          text-decoration: none;
+          color: #64b0f6;
+        }
+
+        input[type="submit"] {
+          border: 0;
+          background-color: #64b0f6;
+          color: #fff;
+          padding: 10px 30px;
+          //   @include border-radius(4px);
+          margin: 10px 0;
+          //   @include box-shadow(0px 15px 5px -10px rgba(20, 67, 111, 0.2));
+          //   transition: $values;
+        }
+      }
+    }
+  }
+
+  .points {
+    display: block;
+    float: left;
+    width: 45%;
+    margin-left: 1%;
+    text-align: center;
+    margin-top: 3%;
+
+    h4 {
+      font-size: 8em;
+      font-weight: 800;
+    }
+
+    p {
+      font-weight: 600;
+      font-size: 1.2em;
+    }
+  }
+
+  .userPermissions {
+    display: block;
+    float: left;
+    width: 100%;
+
+    h1 {
+      font-weight: 600;
+      color: #fff;
+      background-color: transparent;
+      padding: 10px 5px;
+      margin-left: 1.5rem;
+    }
+
+    .userPermissionContainer {
+      display: grid;
+      grid-template-columns: 50% 50%;
+      select {
+        width: 95%;
+        margin: auto;
+      }
+    }
+  }
+
+  .recent,
+  .bought {
+    display: block;
+    float: left;
+    margin-left: 1%;
+    width: 23%;
+    max-height: 300px;
+    overflow: auto;
+
+    h4 {
+      color: #fff;
+      background-color: #222;
+      padding: 10px 5px;
+    }
+
+    ul {
+      li {
+        display: block;
+        padding: 10px 0;
+        padding-left: 5px;
+
+        span {
+          float: right;
+          margin-right: 2px;
+        }
+      }
+
+      li:nth-child(even) {
+        background-color: #ebebeb;
+      }
+    }
+  }
+}
