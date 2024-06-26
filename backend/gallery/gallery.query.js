@@ -2,11 +2,12 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { createClient } = require("@supabase/supabase-js");
 const { v4 } = require("uuid");
+require('dotenv').config();
 
-const supabaseUrl = "https://rqufzhhcewwjafsuxipv.supabase.co";
-const supabaseKey =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJxdWZ6aGhjZXd3amFmc3V4aXB2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTA5MjEyODUsImV4cCI6MjAyNjQ5NzI4NX0.zh8JWJmTq9kQxbsBTakBcS2shXgVvOTq6lZV_pUGxu0";
 
+const supabaseUrl = process.env.UPABASE_KEY_Url;
+const supabaseKey = process.env.SUPABASE_ACCESS_TOKEN
+  
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 const getAllCategories = (app) => {
@@ -563,7 +564,7 @@ const deleteUser = (app) => {
 const loginUser = (app, jwtSecret) => {
   app.post("/login", async (req, res) => {
     try {
-      const { email,   } = req.body;
+      const { email, password } = req.body; // Added password destructuring
 
       // Query admin users
       const { data: adminUsers, error: adminError } = await supabase
