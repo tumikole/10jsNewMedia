@@ -38,7 +38,29 @@
         color: white !important;
       }
     }
+
+    .clientVerificationCode{
+      margin-top: 3rem;
+
+      p{
+        text-align: center;
+        font-size: 1.5rem;
+      }
+
+      input{
+        width: 40%;
+        margin: auto;
+      }
+
+      .clientCodeButton{
+margin-top: 3rem;
+        width: 30%;
+        margin: auto;
+        button{
+        width: 100%;
+        }
+      }
+    }
   }
-  .homeFooter {
-  }
+  
 }

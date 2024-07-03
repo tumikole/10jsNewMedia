@@ -10,7 +10,7 @@
   background-size: cover;
 }
 
-.FormContainer{
+.FormContainer {
   width: 25%;
   margin: auto;
   margin-top: 10rem;
@@ -19,7 +19,6 @@
   border-radius: 10px;
   background-color: #369cb880;
   box-shadow: 5px 10px #888888;
-
 }
 
 .loginPageContainer .form {
@@ -91,4 +90,9 @@
 .client-link:hover {
   color: blue;
   cursor: pointer;
+}
+
+.alertMessage {
+  width: 25%;
+  margin: auto;
 }

@@ -12,7 +12,8 @@ import {
   Heading,
   Text,
 } from "@chakra-ui/react";
-import { FaHome } from "react-icons/fa"; // Import the home icon from react-icons
+import { FaHome } from "react-icons/fa";
+import Alerts from "../../AdminComponents/Alerts/Alerts";
 
 import ForgetPassword from "./ForgetPassword";
 
@@ -20,6 +21,9 @@ const LoginPage = ({ token, setToken, setLoggedInAdmin }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [ForgotPasswordForm, setForgotPasswordForm] = useState(false);
+  const [successMessage, setSuccessMessage] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
+
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
@@ -30,32 +34,44 @@ const LoginPage = ({ token, setToken, setLoggedInAdmin }) => {
         email: email,
         password: password,
       });
-      // Handle successful login
-      // Store token and user details in local storage
-      localStorage.setItem("token", response.data.token);
-      localStorage.setItem("user", JSON.stringify(response.data.user)); // Convert user object to string before storing
 
-      // Set token and user details in component state for further use if needed
-      setToken(response.data.token);
+      console.log({ response });
 
-      // navigate("/admin_dashboard");
+      if (response.data.success === true) {
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("user", JSON.stringify(response.data.user)); // Convert user object to string before storing
+        setToken(response.data.token);
+        setTimeout(() => {
+          setSuccessMessage(response.data.message);
+        }, 2000);
+        setSuccessMessage(null);
+        navigate("/admin_dashboard");
+      } else {
+        setTimeout(() => {
+          setErrorMessage("Something went wrong");
+        }, 2000);
+        setSuccessMessage(null);
+      }
     } catch (error) {
       console.error("Login failed:", error.response);
-      // Handle login failure (e.g., show error message to the user)
+      setTimeout(() => {
+        setErrorMessage("Something went wrong");
+      }, 2000);
+      setSuccessMessage(null);
     }
   };
 
-  // Check local storage for token on component mount
-  useEffect(() => {
-    const storedToken = localStorage.getItem("token");
-    if (
-      (storedToken && token === null) ||
-      (storedToken && token === undefined)
-    ) {
-      // Set token in component state if found in local storage
-      setToken(storedToken);
-    }
-  }, [setToken, token]);
+  // // Check local storage for token on component mount
+  // useEffect(() => {
+  //   const storedToken = localStorage.getItem("token");
+  //   if (
+  //     (storedToken && token === null) ||
+  //     (storedToken && token === undefined)
+  //   ) {
+  //     // Set token in component state if found in local storage
+  //     setToken(storedToken);
+  //   }
+  // }, [setToken, token]);
 
   return (
     <div className="loginPageContainer">
@@ -98,7 +114,6 @@ const LoginPage = ({ token, setToken, setLoggedInAdmin }) => {
                     align={"start"}
                     justify={"space-between"}
                   >
-                    
                     <Text
                       style={{ cursor: "pointer" }}
                       color={"white"}
@@ -118,6 +133,10 @@ const LoginPage = ({ token, setToken, setLoggedInAdmin }) => {
       ) : (
         <ForgetPassword setForgotPasswordForm={setForgotPasswordForm} />
       )}
+      <br />
+      <div className="alertMessage">
+      <Alerts successMessage={successMessage} errorMessage={errorMessage} />
+      </div>
     </div>
   );
 };

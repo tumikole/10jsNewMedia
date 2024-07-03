@@ -10,11 +10,10 @@ import Partners from "./ComponentUsers/Partners/Partners";
 import Contact from "./ComponentUsers/COntact/Contact";
 import About from "./ComponentUsers/About/About";
 import Blog from "./ComponentUsers/BlogPage/BlogPage";
-import PrivateRoutes from './PrivateRoutes/PrivateRoutes'
+import PrivateRoutes from "./PrivateRoutes/PrivateRoutes";
 import AdminDashboard from "./AdminComponents/AdminDashboard/AdminDashboard.jsx";
-import ClientView from "./ClientView/ClientView.jsx"
-import NotFound from "./PageNotFound/NotFound.jsx"
-
+import ClientView from "./ClientView/ClientView.jsx";
+import NotFound from "./PageNotFound/NotFound.jsx";
 
 const Main = () => {
   const [servicePlan, setServicePlan] = useState("Personal");
@@ -51,7 +50,7 @@ const Main = () => {
   const [eventType, setEventType] = useState("");
   const [discription, setDiscription] = useState("");
   const [photographer, setPhotographer] = useState(adminEmail);
-  const [token, setToken] = useState(localStorage.getItem("token"));
+  const [token, setToken] = useState(() => localStorage.getItem("token"));
   const [loggedInAdmin, setLoggedInAdmin] = useState([]);
   const [allServices, setAllService] = useState(null);
 
@@ -141,7 +140,7 @@ const Main = () => {
       }
     }
 
-    if (token) {
+    if (token !== null) {
       navigate("/admin_dashboard");
     }
     fetchData();
@@ -151,6 +150,7 @@ const Main = () => {
     allFolders,
     allServices,
     loggedInAdmin,
+    token,
     navigate,
     setAdmin,
   ]);
@@ -158,10 +158,10 @@ const Main = () => {
   const userSignOut = () => {
     localStorage.clear();
     const adminUser = localStorage.getItem("user");
-if(!adminUser) {
-    navigate("/");
-}
-  }
+    if (!adminUser) {
+      navigate("/");
+    }
+  };
   const setSourceByFolder = (item) => {
     setFolderBySource(source.filter((src) => src.folder === item));
     setFolderName(item);

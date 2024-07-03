@@ -4,7 +4,8 @@ import { Form } from "../form";
 import GalleryInfo from "./GalleryInfo/GalleryInfo";
 import GalleryView from "./GalleryView/GalleryView";
 
-export const Gallery = () => {
+export const Gallery = ({ adminRole }) => {
+  console.log({adminRole })
   const [seletedTab, setSeletedTab] = useState(null);
   const [seletedCategoryTab, setSeletedCategoryTab] = useState("Stills");
 
@@ -26,7 +27,10 @@ export const Gallery = () => {
           <ul>
             {galleryTabs.map((tab) => {
               return (
-                <li onClick={() => setSeletedTab(tab)}>
+                <li
+                 
+                  onClick={() => setSeletedTab(tab)}
+                >
                   <button
                     className={`btn ${
                       seletedTab === tab ? "btn-info" : "btn-outline-info"
@@ -47,6 +51,12 @@ export const Gallery = () => {
             {categoryTabs.map((tab) => {
               return (
                 <li
+                style={{
+                  display:
+                    adminRole === "Client" && tab === "Projects"
+                      ? "none"
+                      : "block",
+                }}
                   className={`btn ${
                     seletedCategoryTab === tab ? "selectedCat" : "unselectedCat"
                   }`}

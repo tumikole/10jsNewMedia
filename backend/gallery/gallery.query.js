@@ -2,12 +2,11 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { createClient } = require("@supabase/supabase-js");
 const { v4 } = require("uuid");
-require('dotenv').config();
-
+require("dotenv").config();
 
 const supabaseUrl = process.env.UPABASE_KEY_Url;
-const supabaseKey = process.env.SUPABASE_ACCESS_TOKEN
-  
+const supabaseKey = process.env.SUPABASE_ACCESS_TOKEN;
+
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 const getAllCategories = (app) => {
@@ -308,7 +307,7 @@ const updateSourceToDisplayInLandingPage = (app) => {
 const addRequestUsers = (app) => {
   app.post("/request_users", async (req, res) => {
     const clientCode = v4();
-    console.log({clientCode})
+    console.log({ clientCode });
     try {
       const {
         firstName,
@@ -321,10 +320,7 @@ const addRequestUsers = (app) => {
         clientCodeStatus = false,
       } = req.body;
 
-
-
-      console.log(
-        {request: req.body})
+      console.log({ request: req.body });
       let table;
       let existingUsers;
 
@@ -565,12 +561,13 @@ const loginUser = (app, jwtSecret) => {
   app.post("/login", async (req, res) => {
     try {
       const { email, password } = req.body; // Added password destructuring
-
+      console.log({ loginUser: req.body });
       // Query admin users
       const { data: adminUsers, error: adminError } = await supabase
         .from("admin_user")
         .select("*")
         .eq("email", email);
+
       if (adminError) {
         throw adminError;
       }
@@ -1094,6 +1091,7 @@ const checkClientCodeExist = (app) => {
       if (error) {
         throw error;
       }
+      console.log({ data });
       if (clientUsers) {
         const clientData = clientUsers;
 
