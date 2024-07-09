@@ -7,7 +7,11 @@ import Alerts from "../Alerts/Alerts";
 import ViewUser from "./ViewUser/ViewUser";
 
 export const Users = ({ adminEmail, adminRole }) => {
-  const [header, setHeader] = useState("Users");
+  const [header, setHeader] = useState("");
+  const [numberOfUsers, setMumberOfUsers] = useState(null);
+  const [numberOfAdmin, setMumberOfAdmin] = useState(null);
+  const [numberOfClients, setMumberOfClients] = useState(null);
+
   const [users, setUsers] = useState([]);
   const [permissions, setPermissions] = useState([]);
   const [firstname, setFirstname] = useState(null);
@@ -36,15 +40,12 @@ export const Users = ({ adminEmail, adminRole }) => {
 
     try {
       const res = await axios.post(`${url}request_users`, user);
-      console.log({ first: res.data });
       if (res.data.success) {
         setSuccessMessage(res.data.message);
         setTimeout(() => {
           setSuccessMessage(null);
         }, 5000);
       }
-
-      setHeader(header !== "Client" ? "Admin" : header);
     } catch (error) {
       setErrorMessage("User not succefully added");
       setTimeout(() => {
@@ -116,7 +117,6 @@ export const Users = ({ adminEmail, adminRole }) => {
     setShowUser(true);
     setHeader("User profile");
   };
-  console.log({ showUser });
 
   const clearUserInputsFields = () => {
     setFirstname("");
@@ -130,7 +130,6 @@ export const Users = ({ adminEmail, adminRole }) => {
     try {
       const getAllPermissions = async () => {
         const res = await axios.get(`${url}get_all_permissions`);
-        console.log({ res });
         if (res.data.data) {
           setPermissions(res.data.data);
         } else {
@@ -138,6 +137,19 @@ export const Users = ({ adminEmail, adminRole }) => {
         }
       };
 
+      const getAdminLength = async () => {
+        const res = await axios.get(`${url}request_users`);
+        setMumberOfAdmin(res.data.data.length);
+      }
+
+      const getClientLength = async () => {
+        const res = await axios.get(`${url}request_client_users`);
+        setMumberOfClients(res.data.data.length);
+      }
+      const addUsersLength = () => {
+        const results = numberOfAdmin + numberOfClients
+        setMumberOfUsers(results)
+      }
       if (header === "Add") {
         setUsers([]);
       }
@@ -145,9 +157,19 @@ export const Users = ({ adminEmail, adminRole }) => {
         if (permissions.length <= 0) {
           getAllPermissions();
         }
-      };
-    } catch (error) {}
-  }, [permissions, header, selectedRole]);
+
+        if ( header === "") {
+          getAdminLength()
+          getClientLength()
+        }
+        if (numberOfAdmin || numberOfClients) {
+          addUsersLength()
+        }
+      }
+    } catch (error) {
+
+    }
+  }, [permissions, header, selectedRole, numberOfUsers, numberOfAdmin, numberOfClients]);
 
   return (
     <div className="adminUsers">
@@ -158,13 +180,21 @@ export const Users = ({ adminEmail, adminRole }) => {
               {header === "Admin"
                 ? `${header} users`
                 : header === "Clients"
-                ? `${header} users`
-                : header === "Add"
-                ? `${header} users`
-                : "Users"}
+                  ? `${header} users`
+                  : header === "Add"
+                    ? `${header} users`
+                    : "Users"}
             </h1>
           </div>
           <div className="addUserButton">
+            <div onClick={() => setAdminUsers()}>
+              <button
+                className="btn btn-outline-info addUser"
+                onClick={() => setHeader("")}
+              >
+                Users
+              </button>
+            </div>
             <div onClick={() => setAdminUsers()}>
               <button
                 className="btn btn-outline-info addUser"
@@ -194,8 +224,8 @@ export const Users = ({ adminEmail, adminRole }) => {
           style={{
             display:
               users.length > 0 &&
-              !showUser &&
-              (adminRole === "Super Admin" || adminRole === "Project Manager")
+                !showUser && header !== "" &&
+                (adminRole === "Super Admin" || adminRole === "Project Manager")
                 ? "flex"
                 : "none",
           }}
@@ -219,6 +249,45 @@ export const Users = ({ adminEmail, adminRole }) => {
             <button className=" filter">
               <box-icon name="grid" type="solid" color="#ffffff"></box-icon>
             </button>
+          </div>
+        </div>
+        {/* //////////////// */}
+        <div className="users_new_styling" style={{ display: header === "" ? "block" : "none" }}>
+
+          <div class="banner">
+            <div className="img">
+              <div class="overlay left">
+                <h1 id="counter">{numberOfUsers ? numberOfUsers : "0"}</h1>
+                <p class="muted">Total users</p>
+              </div>
+            </div>
+          </div>
+          <div className="showAllUsersLength">
+            <div className="admin">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Admin</h5>
+                  <p class="card-text">{numberOfAdmin ? numberOfAdmin : "0"}</p>
+                  <button className="btn btn-info"
+                    onClick={() => setHeader("Admin")}
+
+                  >View admins</button>
+                </div>
+              </div>
+            </div>
+            <div className="clients">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Clients</h5>
+                  <p class="card-text">{numberOfClients ? numberOfClients : "0"}</p>
+                  <button className="btn btn-info"
+                    onClick={() => setHeader("Clients")}
+                  >View clients</button>
+                </div>
+              </div>
+
+            </div>
+
           </div>
         </div>
 
@@ -368,7 +437,7 @@ export const Users = ({ adminEmail, adminRole }) => {
                 })}
             </div>
           </div>
-        ) : users.length > 0 && !showUser ? (
+        ) : users.length > 0 && !showUser && header !== '' ? (
           <div
             className="userList"
             style={{ display: users.length > 0 ? "block" : "none" }}
@@ -450,9 +519,13 @@ export const Users = ({ adminEmail, adminRole }) => {
           </div>
         ) : showUser ? (
           <ViewUser selectedUser={selectedUser} adminRole={adminRole} />
-        ) : (
-          <Spinner />
-        )}
+        ) :
+          header !== '' && !showUser ?
+            (
+              <Spinner />
+            )
+
+            : ""}
       </div>
 
       <ModalShow

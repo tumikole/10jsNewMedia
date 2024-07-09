@@ -1,12 +1,13 @@
-// database.js
+const keys = require('./keys')
+console.log({keys})
 const { Pool } = require('pg');
 
 const pool = new Pool({
-  user: 'postgres',
-  host: 'localhost',
-  database: 'mediaproduction',
-  password: 'walalawasala',
-  port: 5432,
+  user: keys.pgUser,
+  host: keys.pgHost,
+  database: keys.pgDatabase,
+  password: keys.pgPassword,
+  port: keys.pgPort,
 });
 
 const getClient = () => {

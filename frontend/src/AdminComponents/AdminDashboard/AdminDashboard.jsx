@@ -27,23 +27,7 @@ const AdminDashboard = ({
   itemLength,
   getAllStills,
 }) => {
-  // console.log({
-  //   loggedInAdmin,
-  //   allServices,
-  //   adminAvatar,
-  //   adminName,
-  //   adminLastName,
-  //   adminStatus,
-  //   adminRole,
-  //   userSignOut,
-  //   adminEmail,
-  //   adminPermissions,
-  //   clientAdminVerified,
-  //   clientAdminVerificationCode,
-  //   stills,
-  //   itemLength,
-  //   getAllStills,
-  // });
+
   const [selectedTab, setSelectedTab] = useState(null);
   const tabs = [
     "Users",
@@ -89,7 +73,9 @@ const AdminDashboard = ({
               {tabs.map((tab) => {
                 return (
                   <li
+                  className={tab === selectedTab ? "li-selected" : "li-none-selected"}
                     style={{
+                     
                       display:
                         adminRole === "Client" &&
                         tab !== "Gallery" &&

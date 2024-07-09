@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 const { createClient } = require("@supabase/supabase-js");
 const { v4 } = require("uuid");
 require("dotenv").config();
+const { getClient } = require('../database');
 
 const supabaseUrl = process.env.UPABASE_KEY_Url;
 const supabaseKey = process.env.SUPABASE_ACCESS_TOKEN;
@@ -306,8 +307,9 @@ const updateSourceToDisplayInLandingPage = (app) => {
 /////////////////////////////////////////////Start here///////////////////////////////////////////////////////////////////
 const addRequestUsers = (app) => {
   app.post("/request_users", async (req, res) => {
+    const client = getClient()
+    console.log({ dfsdf: client })
     const clientCode = v4();
-    console.log({ clientCode });
     try {
       const {
         firstName,
@@ -320,7 +322,6 @@ const addRequestUsers = (app) => {
         clientCodeStatus = false,
       } = req.body;
 
-      console.log({ request: req.body });
       let table;
       let existingUsers;
 
@@ -640,6 +641,7 @@ const loginUser = (app, jwtSecret) => {
 
 const addService = (app) => {
   app.post("/create_service", async (req, res) => {
+    console.log(req.body)
     try {
       const { serviceImage, title, serviceList, price, creator } = req.body;
 

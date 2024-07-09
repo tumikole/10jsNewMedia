@@ -40,14 +40,17 @@
             margin-left: 1rem;
           }
         }
+
         .user {
           margin-top: 2rem;
+
           h2 {
             color: white;
             text-align: left !important;
             font-size: 1.5rem;
             margin-left: 1rem;
           }
+
           h3 {
             color: white;
             text-align: left !important;
@@ -67,7 +70,7 @@
         margin-top: 2rem;
         padding: 0.5rem !important;
 
-        li {
+        .li-none-selected {
           padding: 0.3rem !important;
           background-color: #2159b9;
           border-radius: 20px;
@@ -77,8 +80,31 @@
           margin-top: 0.5rem;
           margin-bottom: 0.5rem;
           color: white !important;
-text-decoration: none;
-list-style: none;
+          text-decoration: none;
+          list-style: none;
+
+          &:hover {
+            background-color: white;
+            color: #2159b9 !important;
+            border-bottom: 1px solid #2159b9;
+            cursor: pointer;
+
+          }
+        }
+
+        .li-selected {
+          padding: 0.3rem !important;
+          background-color: white;
+          border-radius: 20px;
+          border-bottom: 1px solid white;
+          width: 90%;
+          margin: auto;
+          margin-top: 0.5rem;
+          margin-bottom: 0.5rem;
+          color: #2159b9 !important;
+          text-decoration: none;
+          list-style: none;
+
           &:hover {
             background-color: white;
             color: #2159b9 !important;
@@ -119,6 +145,7 @@ list-style: none;
             cursor: pointer;
           }
         }
+
         .signout {
           padding: 0.3rem !important;
           background-color: goldenrod;

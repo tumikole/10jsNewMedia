@@ -1,7 +1,7 @@
 .adminUsers {
   height: 100vh;
   position: relative;
-
+overflow: hidden;
   .title {
     display: grid;
     grid-template-columns: 70% 30%;
@@ -95,4 +95,98 @@
         overflow-x: hidden;      }
     }
   }
+}
+
+
+///////////
+.users_new_styling{
+
+.banner .img {
+background-image: url('https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+  height: 25rem;
+  width: 70%;
+margin: auto;
+margin-top: 5rem;
+border-radius: 20px;
+position: relative;
+  -webkit-mask-image: linear-gradient(
+    rgba(0, 0, 0, 1) 10%,
+    rgba(0, 0, 0, 0) 90%
+  );
+}
+
+.banner {
+  object-fit: cover;
+  height: 25rem;
+  position: relative;
+}
+
+.overlay {
+  padding: 1rem;
+  right: 0;
+  left: 0;
+}
+
+.left {
+
+
+  h1{
+    text-align: center;
+    font-size: 5rem;
+  }
+
+  p{
+    text-align: center;
+    font-size: 3rem;
+  }
+
+}
+
+
+
+
+.mobile {
+  display: none;
+}
+
+@media only screen and (max-width: 650px) {
+  .no-mobile {
+    display: none;
+  }
+  .mobile {
+    display: block;
+  }
+  body {
+    padding: 0 10vw 5vh 10vw;
+  }
+}
+
+.showAllUsersLength{
+display: grid;
+grid-template-columns: 50% 50%;
+width: 80%;
+margin-top: 1rem !important;
+margin: auto;
+padding: 2rem;
+  .admin{
+    width: 80%;
+    margin: auto;
+.card{
+  background-image: url('https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') !important;
+  background-size:cover ;
+  background-repeat: no-repeat;
+}
+  }
+
+  .clients{
+
+    width: 80%;
+    margin: auto;
+    .card{
+      background-image: url('https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') !important;
+      background-size:cover ;
+      background-repeat: no-repeat;
+    }
+  }
+}
 }
