@@ -1,5 +1,4 @@
 const keys = require('./keys')
-console.log({keys})
 const { Pool } = require('pg');
 
 const pool = new Pool({

@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import "./ViewUser.scss";
 import Image from "../../../Asserts/noImageAvail.webp";
+import AddClientContent from "./AddClientContent/AddClientContent";
 
-const ViewUser = ({ selectedUser, adminRole }) => {
-  console.log({ selectedUser });
+const ViewUser = ({ selectedUser, adminRole, adminId, adminName, adminLastName }) => {
+  const [show, setShow] = useState(false);
+
+
+  const  addClientDataModal = () => {
+    setShow(true);
+  }
+  
   return (
     <div className="ViewUser">
       <div class="topper">
@@ -41,7 +48,7 @@ const ViewUser = ({ selectedUser, adminRole }) => {
           </div>
           <div>
             {selectedUser.client_code_verified &&
-            selectedUser.role === "Client" ? (
+              selectedUser.role === "Client" ? (
               <div
                 style={{
                   display: selectedUser.role === "Client" ? "flex" : "none",
@@ -65,7 +72,13 @@ const ViewUser = ({ selectedUser, adminRole }) => {
           </div>
         </div>
         <div class="points">
-          <h4 style={{ color: "white" }}>875</h4>
+          <h4 style={{ color: "white" }}>
+            {selectedUser.role === "Client" && (
+              <div onClick={addClientDataModal}>
+                <box-icon name='image-add' size="lg" color='#00eeff' ></box-icon>
+              </div>
+            )}
+          </h4>
           <p style={{ color: "white" }}>Role: {selectedUser.role}</p>
         </div>
         <hr style={{ color: "white" }} />
@@ -117,6 +130,7 @@ const ViewUser = ({ selectedUser, adminRole }) => {
           </div>
         </div>
       </div>
+      <AddClientContent show={show} setShow={setShow} adminId={adminId} adminName={adminName} adminLastName={adminLastName} selectedUser={selectedUser}/>
     </div>
   );
 };

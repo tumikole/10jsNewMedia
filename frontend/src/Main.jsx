@@ -17,6 +17,7 @@ import NotFound from "./PageNotFound/NotFound.jsx";
 
 const Main = () => {
   const [servicePlan, setServicePlan] = useState("Personal");
+  const [adminId, setAdminId] = useState("");
   const [adminAvatar, setAdminAvatar] = useState("");
   const [adminName, setAdminName] = useState("");
   const [adminLastName, setAdminLastName] = useState("");
@@ -72,6 +73,8 @@ const Main = () => {
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const setAdmin = () => {
+    
+    setAdminId(loggedInAdmin.id);
     setAdminAvatar(loggedInAdmin.avatar);
     setAdminName(loggedInAdmin.first_name);
     setAdminLastName(loggedInAdmin.last_name);
@@ -211,6 +214,7 @@ const Main = () => {
             path="/admin_dashboard"
             element={
               <AdminDashboard
+              adminId={adminId}
                 loggedInAdmin={loggedInAdmin}
                 allServices={allServices}
                 adminAvatar={adminAvatar}
@@ -226,6 +230,8 @@ const Main = () => {
                 stills={stills}
                 itemLength={itemLength}
                 getAllStills={getAllStills}
+                allCategory={allCategory}
+                allFolders={allFolders}
               />
             }
           />

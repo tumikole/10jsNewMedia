@@ -50,6 +50,9 @@ overflow: hidden;
   }
   .userList {
     margin-top: 7rem;
+    overflow: auto;
+    height: 75vh;
+
     .table {
       tbody {
         tr {

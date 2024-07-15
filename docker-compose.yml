@@ -16,10 +16,12 @@ services:
     ports:
       - '4000:80'
 
-  api: 
-    build:
-      dockerfile: dockerfile.server
-      context: './backend'
+  api:
+    build: 
+      dockerfile: ./backend/Dockerfile
+      context: ./backend
+    ports:
+      - '4000:4000'
     volumes:
       - ./backend/node-modules:/app/node-modules
       - ./backend:/app
@@ -29,10 +31,11 @@ services:
       - PORT=4000
 
   frontend:
-    stdin_open: true
     build: 
-      dockerfile: dockerfile
-      context: './frontend'
+      dockerfile: ./frontend/Dockerfile
+      context: ./frontend
+    ports:
+      - '3000:3000'
     volumes:
       - ./frontend/node-modules:/app/node-modules
       - ./frontend:/app

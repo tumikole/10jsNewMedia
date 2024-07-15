@@ -337,7 +337,9 @@
 }
 
 .addSideOne .addContentDateAndName h2 {
-  font-size: 3rem;
+  font-size: 2rem;
+  color: #0ef !important;
+
 }
 
 .addSideOne .addContentDateAndName h3 {

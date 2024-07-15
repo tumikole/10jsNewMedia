@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { createClient } = require("@supabase/supabase-js");
 const { v4 } = require("uuid");
+
 require("dotenv").config();
 const { getClient } = require('../database');
 
@@ -108,88 +109,174 @@ const insertFoldersWithSubfolders = (app) => {
 const addSource = (app) => {
   app.post("/add_source", async (req, res) => {
     const {
+      creatorId,
       srcName,
-      src,
+      srcId,
       folder,
       subFolderName,
       category,
       source_description,
       photographer,
     } = req.body;
+    console.log(srcName,
+      creatorId,
+      srcId,
+      folder,
+      subFolderName,
+      category,
+      source_description,
+      photographer,)
     try {
-      if (
-        srcName ||
-        src ||
-        folder ||
-        subFolderName ||
-        category ||
-        source_description ||
-        photographer
-      ) {
-        const { data, error } = await supabase
-          .from("source")
-          .insert([
-            {
-              source_name: srcName,
-              src_bucket_id: src,
-              folder: folder,
-              sub_folder: subFolderName,
-              category: category,
-              source_description: source_description,
-              photographer: photographer,
-              home_page_flag: false,
-              isApproved: false,
-            },
-          ])
-          .select();
-        if (data) {
-          res.status(201).json({
-            success: true,
-            data: data,
-            message: "Source added successfully",
-          });
-        } else if (error) {
-          if (error.code === "54000") {
-            // Index row size error
-            res.status(400).json({
-              success: false,
-              message:
-                "Data size exceeds maximum limit, please reduce the size of the data",
-            });
-          } else {
-            // Other database errors
-            res.status(500).json({
-              success: false,
-              error: error.message || "Failed to add source",
-            });
-          }
-        }
-      } else {
-        res.status(400).json({
+      // Check if all required fields are provided
+      if (!creatorId || !srcName || !srcId || !folder || !subFolderName || !category || !source_description || !photographer) {
+        return res.status(400).json({
           success: false,
           message: "All fields are required",
         });
       }
+
+      const { data, error } = await supabase
+        .from("admin_source")
+        .insert([
+          {
+            creator_id: creatorId,
+            source_name: srcName,
+            src_bucket_id: srcId,
+            folder: folder,
+            sub_folder: subFolderName,
+            category: category,
+            source_description: source_description,
+            photographer: photographer,
+            home_page_flag: false,
+            isApproved: false,
+          },
+        ])
+        .select();
+
+      if (error) {
+        if (error.code === "54000") {
+          // Index row size error
+          return res.status(400).json({
+            success: false,
+            message: "Data size exceeds maximum limit, please reduce the size of the data",
+          });
+        } else {
+          // Other database errors
+          return res.status(500).json({
+            success: false,
+            message: error.message || "Failed to add source",
+          });
+        }
+      }
+
+      return res.status(201).json({
+        success: true,
+        data: data,
+        message: "Source added successfully",
+      });
+
     } catch (error) {
-      console.error("Error:", error);
-      res.status(500).json({
+      return res.status(500).json({
         success: false,
-        error: "Failed to add source",
+        message: "Failed to add source due to server error",
       });
     }
   });
 };
 
-const getAllSource = (app) => {
-  app.get("/get_all_source/:category", async (req, res) => {
+
+const getAdminSource = (app) => {
+  app.get("/get_all_user_contents/:id", async (req, res) => {
     try {
-      const { category } = req.params;
+      const { id } = req.params;  // Correctly extract the id parameter
+
+      const { data: adminUsers, error } = await supabase
+        .from("admin_source")
+        .select("*")
+        .eq("creator_id", id);  // Use the correct parameter in the query
+
+      if (error) {
+        throw error;
+      }
+
+      res.status(200).json({
+        success: true,
+        data: adminUsers,
+        message: "Retrieved stills successfully",
+      });
+    } catch (error) {
+      console.error("Error:", error);
+      res.status(500).json({ success: false, error: "Failed to retrieve users" });
+    }
+  });
+}
+
+
+const deleteSourceFromTheTable = (app) => {
+  app.delete("/delete_source_from_table/:fileId", async (req, res) => {
+    const { fileId } = req.params;
+    console.log(fileId)
+    const { data, error } = await supabase
+      .from('admin_source')
+      .select()
+      .eq('src_bucket_id', fileId)
+      .single()
+
+    if (error) {
+      console.error("Error deleting file:", error.message);
+      res.status(500).json({ error: error.message });
+    } else if (data) {
+      console.log({ data })
+      res.status(200).json({ success: true, message: "File deleted successfully" });
+    }
+  });
+
+
+}
+
+const deleteSource = (app) => {
+  app.post("/delete_source", async (req, res) => {
+    const { bucketName, path, fileName } = req.body;
+    if (bucketName && path && fileName) {
+      const fullPath = `${path}/${fileName}`;
+      try {
+        const { data, error } = await supabase.storage
+          .from('bucketName')
+          .remove([fullPath]);
+
+
+
+        if (error) {
+          console.error("Error deleting file:", error.message);
+          res.status(500).json({ error: error.message });
+        } else if (data) {
+
+          res.status(200).json({ success: true, message: "File deleted successfully" });
+        }
+      } catch (error) {
+        console.error("Error deleting file:", error.message);
+        res.status(500).json({ error: error.message });
+      }
+    } else {
+      res.status(400).json({ error: 'Invalid request' });
+    }
+  });
+};
+
+
+
+const getAllSource = (app) => {
+  app.get("/get_all_source", async (req, res) => {
+    try {
 
       const { data, error } = await supabase
-        .from("source")
-        .eq("category", category);
+        .from("admin_source")
+        .select()
+        .eq("home_page_flag", true)
+
       if (data) {
-        res.json({ response: data });
+        console.log("got data")
+        res.json({ data: data });
       }
       if (error) {
         res.json({ Message: "An error occurred while retrieving source" });
@@ -225,18 +312,24 @@ const getAllSourceLandingPagee = (app) => {
 };
 ////////////////////////////////////
 const getAllStills = (app) => {
-  app.get("/get_all_stills/", async (req, res) => {
+  app.post("/get_files/", async (req, res) => {
+    const { bucketName, pathName } = req.body;
+    const fullPath = `${pathName}/`;
+
     try {
-      const client = getClient();
-      const response = await client.query(
-        `SELECT * FROM source WHERE category = 'Stills'`
-      );
-      res.json({ response: response.rows });
+      const { data, error } = await supabase.storage
+        .from(bucketName)
+        .list(fullPath);
+
+      if (error) {
+        res.json({ error: 'Failed to upload data' });
+        return { data: null, error };
+      }
+
+      res.json({ data });
     } catch (error) {
-      console.error("Error retrieving source:", error);
-      res
-        .status(500)
-        .json({ error: "An error occurred while retrieving source" });
+      console.error("Error fetching uploaded data:", error.message);
+      res.json({ error: { message: "Error fetching uploaded data" } });
     }
   });
 };
@@ -1120,132 +1213,101 @@ const checkClientCodeExist = (app) => {
 
 const addClientSources = (app) => {
   app.post("/add_client_source", async (req, res) => {
-    const { email, code, fileType, files } = req.body;
+    const { creatorId, srcId, clientId, category, clientEmail, username, photographer } = req.body;
+
+    // Validate incoming data
+    if (!creatorId || !srcId || !clientId || !category || !clientEmail || !username || !photographer) {
+      return res.status(400).json({ error: "All fields are required" });
+    }
+
+    // Ensure srcId is an array of strings
+    const newSrcId = Array.isArray(srcId) ? srcId : [srcId];
+
     try {
-      if (fileType === "images" || fileType === "videos") {
-        // Retrieve existing client source data from Supabase
-        const { data: existingUser, error } = await supabase
+      // Check if the client_id exists
+      const { data: existingRecords, error: fetchError } = await supabase
+        .from("client_sources")
+        .select()
+        .eq("client_id", clientId);
+
+      if (fetchError) {
+        throw fetchError;
+      }
+
+      if (existingRecords && existingRecords.length > 0) {
+        // Merge the files if the record exists
+        const existingFiles = existingRecords[0].src_bucket_id;
+        const mergedFiles = [...new Set([...existingFiles, ...newSrcId])]; // Merging and removing duplicates
+
+        const { error: updateError } = await supabase
           .from("client_sources")
-          .select("*")
-          .eq("email", email)
-          .eq("file_type", fileType)
-          .single();
+          .update({ src_bucket_id: mergedFiles })
+          .eq("client_id", clientId);
+
+        if (updateError) {
+          console.error("Failed to update files:", updateError);
+          return res.status(500).json({ success: false, message: "Failed to update files" });
+        }
+        return res.status(200).json({ success: true, message: "Files updated successfully", existingRecords });
+      } else {
+        // Insert a new record if it doesn't exist
+        const { data, error } = await supabase
+          .from("client_sources")
+          .insert([
+            {
+              creator_id: creatorId,
+              src_bucket_id: newSrcId,
+              client_id: clientId,
+              category: category,
+              client_email: clientEmail,
+              username,
+              photographer: photographer,
+            },
+          ])
+          .select();
 
         if (error) {
-          throw error;
+          console.error("Failed to upload files:", error);
+          return res.status(500).json({ success: false, message: "Failed to upload files" });
         }
 
-        if (existingUser) {
-          const userClientCode = existingUser.client_code;
-
-          if (userClientCode === code) {
-            const existingFiles = existingUser.files || [];
-            const mergedFiles = existingFiles.concat(files);
-
-            // Update existing client source data in Supabase
-            const { data: updateResult, error: updateError } = await supabase
-              .from("client_sources")
-              .update({ files: mergedFiles })
-              .eq("email", email)
-              .eq("file_type", fileType)
-              .single();
-
-            if (updateError) {
-              throw updateError;
-            }
-
-            res.status(200).json({
-              success: true,
-              data: updateResult,
-              message: "Files successfully added to existing user",
-            });
-          } else {
-            res.status(400).json({
-              success: false,
-              error: "ClientCode does not match the user's clientCode",
-            });
-          }
-        } else {
-          // Insert new client source data into Supabase
-          const { data: result, error: insertError } = await supabase
-            .from("client_sources")
-            .insert([{ email, client_code: code, file_type: fileType, files }]);
-
-          if (insertError) {
-            throw insertError;
-          }
-
-          res.status(201).json({
-            success: true,
-            data: result,
-            message: "Files successfully uploaded for a new user",
-          });
-        }
-      } else {
-        res.status(400).json({
-          success: false,
-          error: "Invalid file type",
-        });
+        return res.status(201).json({ success: true, data, message: "Files uploaded successfully" });
       }
     } catch (error) {
-      console.error("Error processing data:", error);
-      res.status(500).json({ success: false, error: "Internal Server Error" });
+      console.error("An error occurred:", error);
+      return res.status(500).json({ success: false, error: error.message });
     }
   });
 };
 
+
 const getClientSources = (app) => {
-  app.get("/get_client_source", async (req, res) => {
-    const { email, code, fileType } = req.query;
+  app.get("/get_client_source/:creatorId", async (req, res) => {
+    const { creatorId } = req.params; // Use req.params to get the URL parameter
+
+    console.log({ creatorId });
+
+    // Validate incoming data
+    if (!creatorId) {
+      return res.status(400).json({ success: false, error: "creatorId is required" });
+    }
 
     try {
-      // Retrieve client user data from Supabase
-      const { data: existingUser, error } = await supabase
+      const { data, error } = await supabase
         .from("client_sources")
         .select("*")
-        .eq("email", email)
-        .single(); // Assuming there's only one client user with the given email
+        .eq("creator_id", creatorId);
 
       if (error) {
-        throw error;
+        console.error("Error retrieving files:", error.message);
+        return res.status(500).json({ success: false, error: "Internal Server Error" });
       }
 
-      if (existingUser) {
-        const user = existingUser;
-        const userClientCode = user.client_code;
-
-        // Check if clientCode matches the user's clientCode
-        if (userClientCode === code) {
-          // If clientCode matches, retrieve files based on fileType
-          const { data: filesByType, error: filesError } = await supabase
-            .from("client_sources")
-            .select("*")
-            .eq("email", email)
-            .eq("file_type", fileType);
-
-          if (filesError) {
-            throw filesError;
-          }
-
-          res.status(200).json({
-            success: true,
-            data: filesByType,
-            message: "Files successfully retrieved",
-          });
-        } else {
-          // If clientCode doesn't match the user's clientCode, return an error
-          res.status(400).json({
-            success: false,
-            error: "ClientCode does not match the user's clientCode",
-          });
-        }
-      } else {
-        // If user doesn't exist, return an error
-        res.status(404).json({
-          success: false,
-          error: "User not found with the provided email",
-        });
+      if (!data || data.length === 0) {
+        return res.status(404).json({ success: false, error: "No records found" });
       }
+
+      res.status(200).json({ success: true, data });
     } catch (error) {
       console.error("Error retrieving files:", error.message);
       res.status(500).json({ success: false, error: "Internal Server Error" });
@@ -1501,4 +1563,7 @@ module.exports = {
   updateSourceToDisplayInLandingPage,
   createPost,
   getAllClientPosts,
+  deleteSource,
+  getAdminSource,
+  deleteSourceFromTheTable
 };

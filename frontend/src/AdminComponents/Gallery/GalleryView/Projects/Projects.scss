@@ -1,0 +1,55 @@
+.addProjectsForm{
+    display: grid;
+    font-family: "Poppins", sans-serif;
+    background: transparent;
+    background-size: cover;
+    background-position: center;
+  
+  .container {
+    width: 30%;
+    background: transparent;
+    border-radius: 1rem;
+    backdrop-filter: blur(1rem);
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    padding: 3rem 4rem;
+    color: #fff;
+    margin-top: 3rem;
+
+  }
+  
+  h1 {
+    font-size: 2rem;
+    text-align: center;
+  }
+  
+  .input-box {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    margin: 10px 0;
+  }
+  
+  .input-box input {
+    width: 100%;
+    height: 60%;
+    background: transparent;
+    border: none;
+    border: 2px solid rgba(255, 255, 255, .2);
+    border-radius: 10px;
+    font-size: 1.6rem;
+    color: #fff;
+    padding: 1rem ;
+  }
+  
+  .input-box input::placeholder {
+    color: #fff;
+  }
+  
+  .btn {
+    width: 100%;
+    font-weight: 600;
+    font-weight: 600;
+  }
+  
+
+}

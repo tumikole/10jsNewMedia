@@ -31,6 +31,68 @@ function MainGallery({
   const [sourceFolder, setSourceFolder] = useState();
   const [selectedFoldersName, setSelectedFoldersName] = useState("");
   const [randomImage, setRandomImage] = useState(null);
+  const [slogan, setSlog] = useState(null)
+
+
+  function getRandomSlogan() {
+    const slogans = [
+      "Capturing Moments, Creating Memories",
+      "Live the Moment, Frame the Memory",
+      "Every Shot Tells a Story",
+      "Life in Focus",
+      "Freeze Time, Feel Alive",
+      "See the World, Live the Experience",
+      "Moments that Matter",
+      "Where Life Meets Lens",
+      "Snapshots of Joy",
+      "Cherish Every Moment",
+      "Focus on What Matters",
+      "Eternalize Your Moments",
+      "A Picture is Worth a Thousand Words",
+      "Frame the Beauty",
+      "Capture Life's Wonders",
+      "Preserve the Present",
+      "Life Through a Lens",
+      "Timeless Treasures",
+      "Moments Frozen in Time",
+      "Picture Perfect Memories",
+      "Reflections of Reality",
+      "Where Moments Become Memories",
+      "Frame Your Story",
+      "See the Beauty in Every Moment",
+      "Life's Precious Moments",
+      "Memories Captured Forever",
+      "Focus on the Journey",
+      "Cherished Captures",
+      "Moments that Last a Lifetime",
+      "Your Life, Your Story",
+      "Life's Little Moments",
+      "Capturing the Heartbeat of Life",
+      "Experience Life Through the Lens",
+      "The Art of Photography",
+      "Moments that Take Your Breath Away",
+      "Live, Love, Capture",
+      "The Magic of Moments",
+      "Through the Eyes of a Lens",
+      "Life's Fleeting Moments",
+      "Your Memories, Our Passion",
+      "Treasure Every Moment",
+      "Where Every Click Counts",
+      "Life's Finest Moments",
+      "The Essence of Time",
+      "Memory Makers",
+      "Lens of Life",
+      "Timeless Snapshots",
+      "In the Blink of an Eye",
+      "Moments to Remember",
+      "Creating Lasting Memories"
+    ];
+
+    const randomIndex = Math.floor(Math.random() * slogans.length);
+    setSlog(slogans[randomIndex])
+
+  }
+
 
   const stills1 = [
     {
@@ -102,10 +164,18 @@ function MainGallery({
   // };
 
   useEffect(() => {
+    if (slogan === null && categoryType === 'Stills') {
+      console.log({ categoryType })
+      getRandomSlogan()
+    } else if (categoryType === 'Projects' || categoryType === 'Motion Pictures') {
+      setSlog(null)
+    }
+
     // logRandomImage();
     // const intervalId = setInterval(logRandomImage, 5000);
     // return () => clearInterval(intervalId);
-  }, []);
+  }, [slogan, categoryType]);
+
 
   // const showSelectedSource = (item) => {
   //   setSourceAddress(item.src);
@@ -143,7 +213,7 @@ function MainGallery({
             <h1
               className="galleryMainContainerSideOneH1"
               disabled
-              // onClick={() => setShowFolders(!showFolders)}
+            // onClick={() => setShowFolders(!showFolders)}
             >
               Category
             </h1>
@@ -197,7 +267,7 @@ function MainGallery({
             <h1
               className="galleryMainContainerSideOneH1"
               disabled
-              // onClick={() => setShowFolders(!showFolders)}
+            // onClick={() => setShowFolders(!showFolders)}
             >
               Folders
             </h1>
@@ -216,7 +286,7 @@ function MainGallery({
                     onClick={() => setSourceByFolder()}
                     className={
                       selectedFoldersName === "Random" ||
-                      selectedFoldersName === ""
+                        selectedFoldersName === ""
                         ? "selectedFoldersNames"
                         : "foldersNames"
                     }
@@ -292,7 +362,6 @@ function MainGallery({
               >
                 <div className="addSideOne">
                   <div className="addContentDateAndName">
-                    <h4>Added 5 days ago...</h4>
                     {randomImage && (
                       <div>
                         <h2>{randomImage.sourceName}</h2>
@@ -301,8 +370,7 @@ function MainGallery({
                     )}
                     {!randomImage && (
                       <div>
-                        <h2>Example</h2>
-                        <h3>(Folder Name)</h3>
+                        <h2>{slogan}</h2>
                       </div>
                     )}
                   </div>
@@ -340,20 +408,20 @@ function MainGallery({
                       ? "Random"
                       : selectedFoldersName}
                   </li>
-                  
-                    <Select placeholder="">
-                      <option>Date</option>
-                      <option>Ascending</option>
-                      <option>Descending</option>
-                    </Select>
-                    {/* <select class="selectpicker" multiple data-live-search="true">
+
+                  <Select placeholder="">
+                    <option>Date</option>
+                    <option>Ascending</option>
+                    <option>Descending</option>
+                  </Select>
+                  {/* <select class="selectpicker" multiple data-live-search="true">
     <option>Option 1</option>
     <option>Option 2</option>
     <option>Option 3</option>
     <option>Option 4</option>
     <option>Option 5</option>
   </select> */}
-                
+
                 </ul>
               </div>
             </div>

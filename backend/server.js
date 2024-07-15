@@ -42,8 +42,10 @@ const {
   updateSourceToDisplayInLandingPage,
   createPost,
   getAllClientPosts,
+  deleteSource,
+  getAdminSource,
+  deleteSourceFromTheTable
 } = require("./gallery/gallery.query");
-const { getClient } = require("./database"); // Import getClient from the database module
 
 app.use(cors());
 // Set maximum payload size limit for JSON requests
@@ -90,6 +92,9 @@ getAllStills(app);
 updateSourceToDisplayInLandingPage(app);
 createPost(app);
 getAllClientPosts(app);
+deleteSource(app)
+getAdminSource(app)
+deleteSourceFromTheTable(app)
 
 app.listen(4000, () => {
   console.log("Server running on port 4000");

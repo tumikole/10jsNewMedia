@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import "./OtherServices.scss";
 import Spinner from "../../../Spinners/Spinner";
+import ViewMore from './ViewMore';
 
 function OtherServices({ serviceAndPrice }) {
-
+const [viewMore, setViewMore] = useState(false)
   useEffect(() => {
     const autoplayInterval = setInterval(moveCard, 4000);
     return () => clearInterval(autoplayInterval);
@@ -35,6 +36,11 @@ function OtherServices({ serviceAndPrice }) {
 
   return (
     <div className="userServices">
+
+{viewMore ?
+<ViewMore />
+
+:
       <main>
         <div className="content">
           <h1>Other services</h1>
@@ -46,7 +52,7 @@ function OtherServices({ serviceAndPrice }) {
             experience. Nestled in the heart of the city, our patisserie is a
             haven for those who appreciate the finer things in life.
           </p>
-          <button className="btn">Explore More</button>
+          <button className="btn" onClick={() => setViewMore(true)}>Explore More</button>
         </div>
 
         <div className="stack">
@@ -78,6 +84,7 @@ function OtherServices({ serviceAndPrice }) {
           })}
         </div>
       </main>
+}
     </div>
   );
 };

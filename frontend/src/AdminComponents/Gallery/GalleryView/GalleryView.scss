@@ -28,4 +28,23 @@
   .galleryViewBody {
     // margin-top: 3rem !important;
   }
+
+
+  .userOwnItems {
+
+    .table-striped{
+      width: 100%;
+
+      img{
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        border: 2px solid #0ef;
+      }
+.deleteView{
+  display: flex;
+  gap: 1rem;
+}
+    }
+  }
 }

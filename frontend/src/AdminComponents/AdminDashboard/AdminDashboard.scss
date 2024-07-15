@@ -6,11 +6,11 @@
   .sideOne {
     flex: 20%;
     background-color: #2159b9;
-    height: 100vh;
-    overflow-x: scroll;
+    height: 100vh !important;
+    overflow: auto;
 
     .user-info {
-      width: 98%;
+      width: 100% !important;
       margin: auto;
       margin-top: 2rem;
 
@@ -37,7 +37,7 @@
             border-radius: 50%;
             width: 100px;
             height: 100px;
-            margin-left: 1rem;
+            margin: auto;
           }
         }
 

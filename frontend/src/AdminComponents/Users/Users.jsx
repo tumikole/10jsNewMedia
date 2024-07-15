@@ -6,7 +6,7 @@ import Spinner from "../../Spinners/Spinner";
 import Alerts from "../Alerts/Alerts";
 import ViewUser from "./ViewUser/ViewUser";
 
-export const Users = ({ adminEmail, adminRole }) => {
+export const Users = ({ adminEmail, adminRole, adminId, adminName, adminLastName }) => {
   const [header, setHeader] = useState("");
   const [numberOfUsers, setMumberOfUsers] = useState(null);
   const [numberOfAdmin, setMumberOfAdmin] = useState(null);
@@ -118,6 +118,9 @@ export const Users = ({ adminEmail, adminRole }) => {
     setHeader("User profile");
   };
 
+  const addClientDataModal = () => {
+    setShowUser(true);
+  }
   const clearUserInputsFields = () => {
     setFirstname("");
     setLastname("");
@@ -158,7 +161,7 @@ export const Users = ({ adminEmail, adminRole }) => {
           getAllPermissions();
         }
 
-        if ( header === "") {
+        if (header === "") {
           getAdminLength()
           getClientLength()
         }
@@ -251,9 +254,8 @@ export const Users = ({ adminEmail, adminRole }) => {
             </button>
           </div>
         </div>
-        {/* //////////////// */}
-        <div className="users_new_styling" style={{ display: header === "" ? "block" : "none" }}>
 
+        <div className="users_new_styling" style={{ display: header === "" ? "block" : "none" }}>
           <div class="banner">
             <div className="img">
               <div class="overlay left">
@@ -518,7 +520,7 @@ export const Users = ({ adminEmail, adminRole }) => {
             </table>
           </div>
         ) : showUser ? (
-          <ViewUser selectedUser={selectedUser} adminRole={adminRole} />
+          <ViewUser selectedUser={selectedUser} adminRole={adminRole} adminId={adminId} adminName={adminName} adminLastName={adminLastName} />
         ) :
           header !== '' && !showUser ?
             (

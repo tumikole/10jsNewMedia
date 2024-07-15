@@ -11,6 +11,7 @@ import Messages from "../Messages/Messages";
 import Settings from "../Settings/Settings";
 
 const AdminDashboard = ({
+  adminId,
   loggedInAdmin,
   allServices,
   adminAvatar,
@@ -26,6 +27,10 @@ const AdminDashboard = ({
   stills,
   itemLength,
   getAllStills,
+  allCategory,
+  allFolders
+
+
 }) => {
 
   const [selectedTab, setSelectedTab] = useState(null);
@@ -73,14 +78,14 @@ const AdminDashboard = ({
               {tabs.map((tab) => {
                 return (
                   <li
-                  className={tab === selectedTab ? "li-selected" : "li-none-selected"}
+                    className={tab === selectedTab ? "li-selected" : "li-none-selected"}
                     style={{
-                     
+
                       display:
                         adminRole === "Client" &&
-                        tab !== "Gallery" &&
-                        tab !== "Blogs" &&
-                        tab !== "Messages"
+                          tab !== "Gallery" &&
+                          tab !== "Blogs" &&
+                          tab !== "Messages"
                           ? "none"
                           : "block",
                     }}
@@ -125,9 +130,15 @@ const AdminDashboard = ({
           ) : selectedTab === "Blogs" ? (
             <Blogs />
           ) : selectedTab === "Users" && adminRole !== "Client" ? (
-            <Users adminEmail={adminEmail} adminRole={adminRole} />
+            <Users adminEmail={adminEmail} adminRole={adminRole} adminId={adminId} adminName={adminName} adminLastName={adminLastName}/>
           ) : selectedTab === "Gallery" ? (
-            <Gallery adminRole={adminRole} />
+            <Gallery adminRole={adminRole} adminId={adminId} adminName={adminName}
+              adminLastName={adminLastName} 
+              allCategory={allCategory}
+              allFolders={allFolders}
+
+              
+              />
           ) : (
             <Home
               adminAvatar={adminAvatar}
